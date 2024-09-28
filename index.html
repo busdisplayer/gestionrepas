@@ -3,31 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion des Heures</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <script src="script.js" defer></script>
+    <title>Mise à jour des heures</title>
 </head>
-<body>
+<body class="w3-container">
+    <h1 class="w3-center">Mise à jour des heures de repas</h1>
+    <div class="w3-center">
+        <select id="hourSelect" class="w3-select">
+            <option value="">Choisissez une heure</option>
+            <option value="11:00">11:00</option>
+            <option value="12:00">12:00</option>
+            <option value="13:00">13:00</option>
+        </select>
 
-<div class="w3-container w3-center">
-    <h2>Gestion des Heures</h2>
+        <select id="studentSelect" class="w3-select">
+            <option value="">Choisissez un étudiant</option>
+        </select>
 
-    <label for="timeSelect">Choisissez une heure :</label>
-    <select id="timeSelect" class="w3-select">
-        <option value="11:00">11h</option>
-        <option value="12:00">12h</option>
-        <option value="13:00">13h</option>
-    </select>
+        <button id="updateButton" class="w3-button w3-teal">Mettre à jour</button>
+        <p id="message" class="w3-text-red"></p>
+    </div>
 
-    <label for="studentSelect">Choisissez un étudiant :</label>
-    <select id="studentSelect" class="w3-select">
-        <!-- Les étudiants seront ajoutés ici -->
-    </select>
-
-    <button class="w3-button w3-blue" id="submitButton">Soumettre</button>
-
-    <div id="message" class="w3-margin-top"></div>
-</div>
-
+    <script src="script.js"></script>
 </body>
 </html>
