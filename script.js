@@ -1,28 +1,47 @@
-const SPREADSHEET_ID = '1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4';
-const API_KEY = 'AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q'; // Remplace par ta vraie clé API
+const SPREADSHEET_ID = '1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4'; // Remplace par ton ID de feuille
+const API_KEY = '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'; // Remplace par ta clé API
+const SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly';
 
+// Fonction pour charger la bibliothèque Google API
+function initClient() {
+    gapi.load('client', () => {
+        gapi.client.init({
+            apiKey: API_KEY,
+            discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+        }).then(() => {
+            fetchStudents(); // Récupérer la liste des étudiants
+        });
+    });
+}
+
+// Récupérer les étudiants depuis Google Sheets
 async function fetchStudents() {
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Heures!B2:B1000?key=${API_KEY}`;
+    const range = 'Heures!B2:B1000'; // Plage des noms des étudiants
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range}?key=${API_KEY}`;
     
     try {
         const response = await fetch(url);
-        if (!response.ok) {
-            const error = await response.json();
-            console.error('Erreur lors de la récupération des étudiants:', error);
-            return [];
-        }
         const data = await response.json();
-        return data.values.map(row => row[0]); // Récupère uniquement les noms d'étudiants
+        const students = data.values.flat(); // Récupérer uniquement les noms
+
+        const studentSelect = document.getElementById('studentSelect');
+        students.forEach(student => {
+            const option = document.createElement('option');
+            option.value = student;
+            option.textContent = student;
+            studentSelect.appendChild(option);
+        });
     } catch (error) {
-        console.error('Erreur réseau:', error);
-        return [];
+        console.error("Erreur lors de la récupération des étudiants:", error);
     }
 }
 
+// Mettre à jour la feuille de calcul avec la nouvelle heure pour l'étudiant sélectionné
 async function updateSheet(hour, student) {
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Heures!A2:B1000?key=${API_KEY}`;
+    const range = `Heures!A2:B1000`; // Plage où les données sont mises à jour
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range}?valueInputOption=USER_ENTERED&key=${API_KEY}`;
     const requestBody = {
-        values: [[hour, student]] // Les données à mettre à jour
+        values: [[hour, student]],
     };
 
     try {
@@ -35,37 +54,28 @@ async function updateSheet(hour, student) {
         });
 
         if (response.ok) {
-            const result = await response.json();
-            document.getElementById('message').textContent = 'Mise à jour réussie!';
-            console.log('Résultat:', result);
+            document.getElementById('message').textContent = "Mise à jour réussie!";
         } else {
-            const error = await response.json();
-            document.getElementById('message').textContent = 'Erreur lors de la mise à jour: ' + JSON.stringify(error);
-            console.error('Erreur:', error);
+            const errorData = await response.json();
+            document.getElementById('message').textContent = "Erreur lors de la mise à jour: " + errorData.error.message;
         }
     } catch (error) {
-        console.error('Erreur lors de l\'envoi des données:', error);
-        document.getElementById('message').textContent = 'Erreur: ' + JSON.stringify(error);
+        console.error("Erreur lors de l'envoi des données:", error);
+        document.getElementById('message').textContent = "Erreur: " + error.message;
     }
 }
 
+// Ajouter l'événement au bouton
 document.getElementById('updateButton').addEventListener('click', () => {
     const hour = document.getElementById('hourSelect').value;
     const student = document.getElementById('studentSelect').value;
+
     if (hour && student) {
         updateSheet(hour, student);
     } else {
-        document.getElementById('message').textContent = 'Veuillez sélectionner une heure et un étudiant.';
+        document.getElementById('message').textContent = "Veuillez sélectionner une heure et un étudiant.";
     }
 });
 
-// Charger les étudiants dans la liste déroulante
-fetchStudents().then(students => {
-    const studentSelect = document.getElementById('studentSelect');
-    students.forEach(student => {
-        const option = document.createElement('option');
-        option.value = student;
-        option.textContent = student;
-        studentSelect.appendChild(option);
-    });
-});
+// Initialiser la bibliothèque Google API
+initClient();
