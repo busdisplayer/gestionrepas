@@ -3,25 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://apis.google.com/js/api.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <title>Mise à jour des heures</title>
+    <title>Mise à jour des heures de repas</title>
 </head>
-<body class="w3-container">
-    <h1 class="w3-center">Mise à jour des heures de repas</h1>
-    <div class="w3-center">
-        <select id="hourSelect" class="w3-select">
-            <option value="">Choisissez une heure</option>
-            <option value="11:00">11:00</option>
-            <option value="12:00">12:00</option>
-            <option value="13:00">13:00</option>
-        </select>
+<body>
+    <div class="w3-container">
+        <h1 class="w3-center">Mise à jour des heures de repas</h1>
+        <div class="w3-center">
+            <select id="hourSelect" class="w3-select">
+                <option value="">Choisissez une heure</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+            </select>
 
-        <select id="studentSelect" class="w3-select">
-            <option value="">Choisissez un étudiant</option>
-        </select>
+            <select id="studentSelect" class="w3-select">
+                <option value="">Choisissez un étudiant</option>
+            </select>
 
-        <button id="updateButton" class="w3-button w3-teal">Mettre à jour</button>
-        <p id="message" class="w3-text-red"></p>
+            <button id="updateButton" class="w3-button w3-green">Mettre à jour</button>
+            <p id="message" class="w3-text-red"></p>
+        </div>
     </div>
 
     <script src="script.js"></script>
