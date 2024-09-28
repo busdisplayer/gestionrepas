@@ -3,27 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Étudiants</title>
     <link rel="stylesheet" href="style.css">
-    <title>Gestion des Repas</title>
 </head>
-<body onload="loadGAPI()">
-    <h1>Gestion des Repas</h1>
-    <div id="meal-selection">
-        <h2>Sélectionne ton heure de repas</h2>
-        <select id="meal-time">
-            <option value="">Choisir une heure</option>
-            <option value="11:00">11:00</option>
-            <option value="12:00">12:00</option>
-            <option value="13:00">13:00</option>
-        </select>
-        <input type="text" id="student-name" placeholder="Nom de l'étudiant" />
-        <button id="submit-time">Envoyer</button>
-    </div>
-    <div id="classmates-list" style="display:none;">
-        <h2>Étudiants qui mangent à la même heure :</h2>
-        <ul id="students-list"></ul>
-    </div>
-    <script src="https://apis.google.com/js/api.js"></script>
+<body>
+    <h1>Liste des Étudiants</h1>
+    <table id="studentsTable">
+        <thead>
+            <tr>
+                <th>Heure</th>
+                <th>Étudiant</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Les lignes des étudiants seront ajoutées ici -->
+        </tbody>
+    </table>
+
     <script src="script.js"></script>
 </body>
 </html>
