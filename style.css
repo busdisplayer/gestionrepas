@@ -1,1 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+h1 {
+    color: #333;
+}
+
+#meal-selection {
+    margin-bottom: 20px;
+}
+
+#students-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#students-list li {
+    background: #e7f3fe;
+    border: 1px solid #b0d4fe;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
 
