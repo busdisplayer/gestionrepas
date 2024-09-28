@@ -21,6 +21,9 @@ async function fetchData() {
 function processResponse(data) {
     const tableBody = document.getElementById("studentsTable").getElementsByTagName("tbody")[0];
 
+    // Vider le corps du tableau avant d'ajouter des nouvelles données
+    tableBody.innerHTML = '';
+
     if (data.values && data.values.length > 0) {
         data.values.forEach(row => {
             const hour = row[0];
