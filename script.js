@@ -1,49 +1,69 @@
-// Remplacez par votre propre clé API et l'ID de la feuille de calcul
-const API_KEY = 'AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q'; // Votre clé API ici
-const SPREADSHEET_ID = '1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4'; // Votre ID de feuille de calcul ici
-const RANGE = 'Heures!A2:B1000'; // Plage à lire
+const API_KEY = 'AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q';
+const SPREADSHEET_ID = '1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4';
+const RANGE = 'Heures!A2:B'; // Assurez-vous que votre plage est correcte
 
-async function fetchData() {
+async function fetchStudents() {
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}?key=${API_KEY}`;
     
     try {
         const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
         const data = await response.json();
-        processResponse(data);
+        if (data.values) {
+            populateStudentSelect(data.values);
+        } else {
+            console.error('Aucune donnée trouvée dans la plage spécifiée.');
+        }
     } catch (error) {
-        console.error("Erreur lors de la récupération des données :", error);
+        console.error('Erreur lors de la récupération des données:', error);
     }
 }
 
-function processResponse(data) {
-    const tableBody = document.getElementById("studentsTable").getElementsByTagName("tbody")[0];
+function populateStudentSelect(values) {
+    const studentSelect = document.getElementById('studentSelect');
+    studentSelect.innerHTML = ''; // Réinitialise les options
 
-    // Vider le corps du tableau avant d'ajouter des nouvelles données
-    tableBody.innerHTML = '';
+    values.forEach(row => {
+        const option = document.createElement('option');
+        option.value = row[1]; // Colonne B (Étudiant)
+        option.textContent = row[1]; // Texte affiché dans la liste
+        studentSelect.appendChild(option);
+    });
+}
 
-    if (data.values && data.values.length > 0) {
-        data.values.forEach(row => {
-            const hour = row[0];
-            const student = row[1];
+async function updateSheet(hour, student) {
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Heures!A2:B2?valueInputOption=USER_ENTERED&key=${API_KEY}`;
+    const requestBody = {
+        values: [[hour, student]] // Met à jour la cellule avec l'heure et le nom
+    };
 
-            // Créer une nouvelle ligne dans le tableau
-            const newRow = tableBody.insertRow();
-            const hourCell = newRow.insertCell(0);
-            const studentCell = newRow.insertCell(1);
-
-            hourCell.textContent = hour;
-            studentCell.textContent = student;
+    try {
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestBody),
         });
-    } else {
-        const newRow = tableBody.insertRow();
-        const cell = newRow.insertCell(0);
-        cell.colSpan = 2;
-        cell.textContent = "Aucune donnée trouvée.";
+
+        if (response.ok) {
+            const result = await response.json();
+            document.getElementById('message').textContent = 'Mise à jour réussie!';
+            console.log(result);
+        } else {
+            const error = await response.json();
+            document.getElementById('message').textContent = 'Erreur lors de la mise à jour: ' + error.message;
+        }
+    } catch (error) {
+        console.error('Erreur lors de l\'envoi des données:', error);
     }
 }
 
-// Appel de la fonction pour récupérer les données lors du chargement de la page
-fetchData();
+// Événements
+document.getElementById('submitButton').addEventListener('click', () => {
+    const selectedHour = document.getElementById('timeSelect').value;
+    const selectedStudent = document.getElementById('studentSelect').value;
+    updateSheet(selectedHour, selectedStudent);
+});
+
+// Initialisation
+fetchStudents();
