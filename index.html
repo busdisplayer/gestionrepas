@@ -2,23 +2,49 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name ="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Page d'affichage des horaires des étudiants pour le repas">
     <title>Qui mange quand ?</title>
     <link rel="shortcut icon" href="https://tse4.mm.bing.net/th?id=OIP.Etpv9YJSlvaFKhG_fgsTBQHaF7&pid=Api">
 </head>
-    <body>
-        <h1>Service en développement... Ouverture du site le 12 octobre 2024</h1>
-        <table id="studentTable">
-            <thead>
-                <tr>
+<body>
+    <h1>Service en développement... Ouverture du site le 12 octobre 2024</h1>
+    
+    <table id="studentTable">
+        <thead>
+            <tr>
                 <th>Heure</th>
                 <th>Nom</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-            </tbody>
-        </table>
-      
-    </body>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        const url = "https://sheets.googleapis.com/v4/spreadsheets/1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4/values/Heures!A2:B?key=AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q";
+        const tableBody = document.querySelector("#studentTable tbody"); // Correction de la parenthèse manquante
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const values = data.values;
+                values.forEach(row => {
+                    const tr = document.createElement('tr');
+                    
+                    const tdHeure = document.createElement('td');
+                    tdHeure.textContent = row[0];
+                    tr.appendChild(tdHeure);
+                    
+                    const tdNom = document.createElement('td');
+                    tdNom.textContent = row[1];
+                    tr.appendChild(tdNom);
+                    
+                    tableBody.appendChild(tr);
+                });
+            })
+            .catch(error => console.error("Erreur de chargement:", error));
+    </script>
+    
+</body>
 </html>
