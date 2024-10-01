@@ -12,6 +12,25 @@
     <div class="w3-blue">
     <h1 class="w3-center">Service en développement... Ouverture du site le 12 octobre 2024</h1>
     </div>
+     <p id="currentDateTime" class="w3-xlarge"></p>
+    <script>
+        // Fonction pour obtenir l'heure et la date actuelles et les afficher
+        function updateDateTime() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
+            const date = now.toLocaleDateString('fr-FR', options);
+            const time = now.toLocaleTimeString('fr-FR');
+
+            document.getElementById('currentDateTime').textContent = date + ' - ' + time;
+        }
+
+        // Mise à jour toutes les secondes
+        setInterval(updateDateTime, 1000);
+
+        // Appel initial pour afficher tout de suite l'heure et la date
+        updateDateTime();
+    </script>
     <table id="studentTable" class="w3-table-all w3-hoverable w3-centered w3-striped w3-bordered w3-white">
         <thead>
             <tr>
