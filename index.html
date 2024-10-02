@@ -122,11 +122,13 @@
                 alert("Ligne à mettre à jour : " + ligne);
 
                 // Préparation de la requête PUT pour mettre à jour la feuille Google Sheets
-                const url2 = `https://sheets.googleapis.com/v4/spreadsheets/1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4/values/${range}?valueInputOption=USER_INPUT&key=4af2273f7594c626db7eb4032177c1b97062854f`;
+                const url2 = `https://sheets.googleapis.com/v4/spreadsheets/1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4/values/${range}?valueInputOption=USER_INPUT`;
                 fetch(url2, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json', 
+                        'client_email':'createstudents@whendoyoueatsoftware.iam.gserviceaccount.com',
+                        'client_id': '114461257677617401315',
                     },
                     body: JSON.stringify({
                         range: range,
