@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="w3-blue">
-    <h1 class="w3-center">Service en développement... Ouverture du site le 12 octobre 2024</h1>
+    <h1 class="w3-center">Service en développement... Ouverture du site le 12 octobre 2024 !</h1>
     </div>
     <div class="w3-center w3-grey">
      <p id="currentDateTime" class="w3-xlarge"></p>
@@ -53,7 +53,7 @@
     <div class="w3-container w3-card w3-white w3-margin-top w3-padding-large w3-round w3-center">
         <h2 class="w3-text-blue">Sélectionnez l'étudiant et l'heure</h2>
 
-        <form class="w3-container" action="#" method="post">
+        <form class="w3-container" id="studentForm">
             <!-- Sélecteur d'étudiant -->
             <label for="studentSelect" class="w3-text-grey"><b>Étudiant</b></label>
             <select id="studentSelect" name="student" class="w3-select w3-border w3-round" required>
@@ -70,15 +70,16 @@
             </select>
 
             <!-- Bouton Submit -->
-            <button type="submit" class="w3-button w3-blue w3-margin-top w3-round">Soumettre</button>
+            <button type="submit" class="w3-button w3-blue w3-margin-top w3-round">Transmettre</button>
         </form>
     </div>
 
      <script>
          <!-- Script qui fait la requête API et upload les listes -->
+        let noms = [];
         const url = "https://sheets.googleapis.com/v4/spreadsheets/1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4/values/Heures!A2:B?key=AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q";
         const tableBody = document.querySelector("#studentTable tbody"); // Correction de la parenthèse manquante
-const studentSelect = document.getElementById("studentSelect");
+        const studentSelect = document.getElementById("studentSelect");
         
         fetch(url)
             .then(response => response.json())
@@ -98,14 +99,46 @@ const studentSelect = document.getElementById("studentSelect");
                     const option = document.createElement('option');
                     option.value = row[1].toLowerCase().replace(/\s+/g, '_'); // Transformation pour avoir une valeur unique
                     option.textContent = row[1]; // Texte de l'option (nom de l'élève)
-
-                    // Ajouter l'option dans le <select>
+                    noms.push(row[1])
+                // Ajouter l'option dans le <select>
                     studentSelect.appendChild(option);
                     
                     tableBody.appendChild(tr);
                 });
             })
             .catch(error => console.error("Erreur de chargement:", error));
+         console.log(noms);
+    </script>
+    <script>
+    document.getElementById("studentForm").addEventListener("submit", function(event) {
+        const student = document.getElementById("studentSelect").value;
+        const time = document.getElementById("time").value;
+
+        for (let i = 0; i < noms.length();i++) {
+            if noms[i] === student) {
+                const ligne = i + 2;
+                const range = 'Heures!A${ligne}:A${ligne};
+                console.log(ligne)
+            }
+        }
+
+        <!-- Localiser l'élève avant -->
+        const url2 = "https://sheets.googleapis.com/v4/spreadsheets/1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4/values/${range}?valueInputOption=USER_INPUT&key=AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q";
+fetch(url2, {
+    method: 'PUT',
+    headers: {
+       'Content-Type':'application/json', 
+    },
+    body = JSON.stringify ({
+        range: range,
+        majorDimension: 'ROWS',
+        values:[
+            [time]
+            ]
+    })
+})
+        .then (response => response.json())
+        .then (data => console.log('Answer: ', data))
     </script>
 </body>
 </html>
