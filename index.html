@@ -96,20 +96,28 @@
             <button type="submit" class="w3-button w3-blue w3-margin-top w3-round">Soumettre</button>
         </form>
     </div>
-    <script>
-        // Récupère les éléments de la liste non ordonnée (ul)
-        const studentList = document.querySelectorAll("#studentList li");
+   <script>
+    const url = "https://sheets.googleapis.com/v4/spreadsheets/1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4/values/Heures!A2:B?key=AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q";
+    
+    // Sélection de l'élément <select> pour ajouter les options
+    const studentSelect = document.getElementById('studentSelect');
 
-        // Sélecteur <select> où nous allons ajouter les options
-        const studentSelect = document.getElementById('studentSelect');
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            const values = data.values;
+            values.forEach(row => {
+                // Création d'une nouvelle option pour le <select>
+                const option = document.createElement('option');
+                option.value = row[1].toLowerCase().replace(/\s+/g, '_'); // Valeur unique (nom transformé en minuscule avec des underscores)
+                option.textContent = row[1]; // Le nom de l'élève dans l'option
 
-        // Parcours des éléments <li> et les ajoute en tant qu'options dans le <select>
-        studentList.forEach(item => {
-            const option = document.createElement('option');
-            option.value = item.textContent.toLowerCase().replace(/\s+/g, '_'); // Valeur unique
-            option.textContent = item.textContent; // Texte de l'option (le nom de l'élève)
-            studentSelect.appendChild(option); // Ajoute l'option au <select>
-        });
-    </script>
+                // Ajout de l'option au <select>
+                studentSelect.appendChild(option);
+            });
+        })
+        .catch(error => console.error("Erreur de chargement:", error));
+</script>
+
 </body>
 </html>
