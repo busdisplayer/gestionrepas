@@ -72,8 +72,8 @@
     <div class="w3-center w3-green">
     <img class="w3-center" src="https://tse1.mm.bing.net/th?id=OIP.PrxjvjnA_RzlJzPP-k21xQHaEr&pid=Api"/>
     </div>
-
-     <div class="w3-container w3-card w3-white w3-margin-top w3-padding-large w3-round w3-center">
+    <!-- Conteneur pour le formulaire -->
+    <div class="w3-container w3-card w3-white w3-margin-top w3-padding-large w3-round w3-center">
         <h2 class="w3-text-blue">Sélectionnez l'étudiant et l'heure</h2>
 
         <form class="w3-container" action="#" method="post">
@@ -96,28 +96,30 @@
             <button type="submit" class="w3-button w3-blue w3-margin-top w3-round">Soumettre</button>
         </form>
     </div>
-   <script>
-    const url = "https://sheets.googleapis.com/v4/spreadsheets/1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4/values/Heures!A2:B?key=AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q";
-    
-    // Sélection de l'élément <select> pour ajouter les options
-    const studentSelect = document.getElementById('studentSelect');
 
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            const values = data.values;
-            values.forEach(row => {
-                // Création d'une nouvelle option pour le <select>
-                const option = document.createElement('option');
-                option.value = row[1].toLowerCase().replace(/\s+/g, '_'); // Valeur unique (nom transformé en minuscule avec des underscores)
-                option.textContent = row[1]; // Le nom de l'élève dans l'option
+    <script>
+        // URL de l'API Google Sheets
+        const url = "https://sheets.googleapis.com/v4/spreadsheets/1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4/values/Heures!A2:B?key=AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q";
+        
+        // Sélection de l'élément <select> pour ajouter les options d'étudiants
+        const studentSelect = document.getElementById('studentSelect');
 
-                // Ajout de l'option au <select>
-                studentSelect.appendChild(option);
-            });
-        })
-        .catch(error => console.error("Erreur de chargement:", error));
-</script>
+        // Récupération des données à partir de Google Sheets
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const values = data.values;
+                values.forEach(row => {
+                    // Création d'une nouvelle option pour chaque étudiant
+                    const option = document.createElement('option');
+                    option.value = row[1].toLowerCase().replace(/\s+/g, '_'); // Transformation en minuscule et remplacement des espaces
+                    option.textContent = row[1]; // Le nom de l'étudiant
 
+                    // Ajout de l'option dans le <select>
+                    studentSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error("Erreur de chargement:", error));
+    </script>
 </body>
 </html>
