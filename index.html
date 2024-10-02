@@ -48,7 +48,8 @@
     <script>
         const url = "https://sheets.googleapis.com/v4/spreadsheets/1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4/values/Heures!A2:B?key=AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q";
         const tableBody = document.querySelector("#studentTable tbody"); // Correction de la parenthèse manquante
-
+const studentSelect = document.getElementById("studentSelect");
+        
         fetch(url)
             .then(response => response.json())
             .then(data => {
@@ -63,6 +64,13 @@
                     const tdNom = document.createElement('td');
                     tdNom.textContent = row[1];
                     tr.appendChild(tdNom);
+
+                    const option = document.createElement('option');
+                    option.value = row[1].toLowerCase().replace(/\s+/g, '_'); // Transformation pour avoir une valeur unique
+                    option.textContent = row[1]; // Texte de l'option (nom de l'élève)
+
+                    // Ajouter l'option dans le <select>
+                    studentSelect.appendChild(option);
                     
                     tableBody.appendChild(tr);
                 });
