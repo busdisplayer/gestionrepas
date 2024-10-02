@@ -87,39 +87,14 @@
             <label for="time" class="w3-text-grey w3-margin-top"><b>Heure</b></label>
             <select id="time" name="time" class="w3-select w3-border w3-round" required>
                 <option value="" disabled selected>Heure ?</option>
-                <option value="11h">11h</option>
-                <option value="12h">12h</option>
-                <option value="13h">13h</option>
+                <option value="11:00">11h</option>
+                <option value="12:00">12h</option>
+                <option value="13:00">13h</option>
             </select>
 
             <!-- Bouton Submit -->
             <button type="submit" class="w3-button w3-blue w3-margin-top w3-round">Soumettre</button>
         </form>
     </div>
-
-    <script>
-        // URL de l'API Google Sheets
-        const url = "https://sheets.googleapis.com/v4/spreadsheets/1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4/values/Heures!A2:B?key=AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q";
-        
-        // Sélection de l'élément <select> pour ajouter les options d'étudiants
-        const studentSelect = document.getElementById('studentSelect');
-
-        // Récupération des données à partir de Google Sheets
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                const values = data.values;
-                values.forEach(row => {
-                    // Création d'une nouvelle option pour chaque étudiant
-                    const option = document.createElement('option');
-                    option.value = row[1].toLowerCase().replace(/\s+/g, '_'); // Transformation en minuscule et remplacement des espaces
-                    option.textContent = row[1]; // Le nom de l'étudiant
-
-                    // Ajout de l'option dans le <select>
-                    studentSelect.appendChild(option);
-                });
-            })
-            .catch(error => console.error("Erreur de chargement:", error));
-    </script>
 </body>
 </html>
