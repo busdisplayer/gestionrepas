@@ -112,15 +112,14 @@
     const student = document.getElementById("studentSelect").value;
     const time = document.getElementById("time").value;
 
-    alert("Étudiant sélectionné : " + student);
-    alert("Heure sélectionnée : " + time);
+  
 
     let range = null; // Initialise la variable range
     for (let i = 0; i < noms.length; i++) {
         if (noms[i].toLowerCase().replace(/\s+/g, '_') === student) {
             const ligne = i + 2; // Ajustement du numéro de ligne pour correspondre à l'indexation de la feuille de calcul
             range = `Heures!A${ligne}:A${ligne}`; // Définit la plage uniquement si une correspondance est trouvée
-            alert("Ligne à mettre à jour : " + ligne);
+            
             break; // Quitte la boucle après avoir trouvé la correspondance
         }
     }
