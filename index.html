@@ -79,7 +79,7 @@
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                const values = data.values;
+                const values = response.values;
                 values.forEach(row => {
                     const tr = document.createElement('tr');
                     
