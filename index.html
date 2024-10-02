@@ -118,24 +118,22 @@
     for (let i = 0; i < noms.length; i++) {
         if (noms[i].toLowerCase().replace(/\s+/g, '_') === student) {
             const ligne = i + 2; // Ajustement du numéro de ligne pour correspondre à l'indexation de la feuille de calcul
-            range = `Heures!A${ligne}:A${ligne}`; // Définit la plage uniquement si une correspondance est trouvée
+            range = ligne; // Définit la plage uniquement si une correspondance est trouvée
             
             break; // Quitte la boucle après avoir trouvé la correspondance
         }
     }
 
     if (range) { // Procède uniquement si une plage correspondante a été trouvée
-        const url2 = `https://sheets.googleapis.com/v4/spreadsheets/1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4/values/${range}?key=AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q`;
+        const url2 = "https://sheetdb.io/api/v1/7ojj5lzk1krgz/id/{range}?sheet=Heure";
 
         fetch(url2, {
-            method: 'PUT',
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                range: range,
-                majorDimension: 'ROWS',
-                values: [[time]]
+                heure: [[time]]
             })
         })
         .then(response => {
