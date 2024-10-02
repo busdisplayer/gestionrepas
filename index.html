@@ -102,8 +102,8 @@
                     tableBody.appendChild(tr);
                 });
             })
-            .catch(error => console.error("Erreur de chargement:", error));
-         console.log(noms);
+            .catch(error => alert("Erreur de chargement: " + error));
+         alert("Noms chargés : " + noms.join(', '));
     </script>
 
     <script>
@@ -112,11 +112,14 @@
         const student = document.getElementById("studentSelect").value;
         const time = document.getElementById("time").value;
 
+        alert("Étudiant sélectionné : " + student);
+        alert("Heure sélectionnée : " + time);
+
         for (let i = 0; i < noms.length; i++) {
             if (noms[i].toLowerCase().replace(/\s+/g, '_') === student) {
                 const ligne = i + 2;
                 const range = `Heures!A${ligne}:A${ligne}`;
-                console.log(ligne);
+                alert("Ligne à mettre à jour : " + ligne);
 
                 // Préparation de la requête PUT pour mettre à jour la feuille Google Sheets
                 const url2 = `https://sheets.googleapis.com/v4/spreadsheets/1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4/values/${range}?valueInputOption=USER_INPUT&key=AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q`;
@@ -134,8 +137,8 @@
                     })
                 })
                 .then(response => response.json())
-                .then(data => console.log('Answer: ', data))
-                .catch(error => console.error('Erreur de soumission:', error));
+                .then(data => alert('Mise à jour réussie : ' + JSON.stringify(data)))
+                .catch(error => alert('Erreur de soumission: ' + error));
             }
         }
     });
