@@ -106,45 +106,54 @@
     </script>
 
     <script>
-    document.getElementById("studentForm").addEventListener("submit", function(event) {
-        event.preventDefault();
-        const student = document.getElementById("studentSelect").value;
-        const time = document.getElementById("time").value;
+  document.getElementById("studentForm").addEventListener("submit", function(event) {
+    event.preventDefault();
 
-        alert("Étudiant sélectionné : " + student);
-        alert("Heure sélectionnée : " + time);
+    const student = document.getElementById("studentSelect").value;
+    const time = document.getElementById("time").value;
 
-        for (let i = 0; i < noms.length; i++) {
-            if (noms[i].toLowerCase().replace(/\s+/g, '_') === student) {
-                const ligne = i + 2;
-                const range = `Heures!A${ligne}:A${ligne}`;
-                alert("Ligne à mettre à jour : " + ligne);
-            }
+    alert("Étudiant sélectionné : " + student);
+    alert("Heure sélectionnée : " + time);
+
+    let range = null; // Initialise la variable range
+    for (let i = 0; i < noms.length; i++) {
+        if (noms[i].toLowerCase().replace(/\s+/g, '_') === student) {
+            const ligne = i + 2; // Ajustement du numéro de ligne pour correspondre à l'indexation de la feuille de calcul
+            range = `Heures!A${ligne}:A${ligne}`; // Définit la plage uniquement si une correspondance est trouvée
+            alert("Ligne à mettre à jour : " + ligne);
+            break; // Quitte la boucle après avoir trouvé la correspondance
         }
+    }
 
-                // Préparation de la requête PUT pour mettre à jour la feuille Google Sheets
-                const url2 = `https://sheets.googleapis.com/v4/spreadsheets/1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4/values/${range}?valueInputOption=USER_INPUT`;
-                fetch(url2, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json', 
-                        'client_email':'createstudents@whendoyoueatsoftware.iam.gserviceaccount.com',
-                        'client_id': '114461257677617401315',
-                    },
-                    body: JSON.stringify({
-                        range: range,
-                        majorDimension: 'ROWS',
-                        values: [
-                            [time]
-                        ]
-                    })
-                })
-                .then(response => response.json())
-                .then(data => alert('Mise à jour réussie : ' + JSON.stringify(data)))
-                .catch(error => alert('Erreur de soumission: ' + error));
+    if (range) { // Procède uniquement si une plage correspondante a été trouvée
+        const url2 = `https://sheets.googleapis.com/v4/spreadsheets/1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4/values/${range}?valueInputOption=USER_INPUT`;
+
+        fetch(url2, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                // Assurez-vous que les informations sensibles sont gérées en toute sécurité
+                // 'Authorization': `Bearer VOTRE_TOKEN_D'ACCÈS`, // Décommentez et ajoutez un token d'accès valide si nécessaire
+            },
+            body: JSON.stringify({
+                range: range,
+                majorDimension: 'ROWS',
+                values: [[time]]
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur réseau : ' + response.statusText);
             }
-        }
-    });
+            return response.json();
+        })
+        .then(data => alert('Mise à jour réussie : ' + JSON.stringify(data)))
+        .catch(error => alert('Erreur de soumission : ' + error));
+    } else {
+        alert("Aucun étudiant trouvé avec ce nom.");
+    }
+});
+
     </script>
 </body>
 </html>
