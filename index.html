@@ -125,7 +125,7 @@
     }
 
     if (range) { // Procède uniquement si une plage correspondante a été trouvée
-        const url2 = "https://sheetdb.io/api/v1/7ojj5lzk1krgz/Heures/{range}?sheet=Heures";
+        const url2 = "https://sheetdb.io/api/v1/7ojj5lzk1krgz/Heures/${range}?sheet=Heures";
 
         fetch(url2, {
             method: 'PATCH',
@@ -134,7 +134,7 @@
             },
             body: JSON.stringify({
                 data :{
-                "A{range}": [[time]]
+                "A${range}": [[time]]
             }
             })
         })
