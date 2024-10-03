@@ -105,14 +105,12 @@
             .catch(error => alert("Erreur de chargement: " + error));
     </script>
 
-    <script>
+ <script>
   document.getElementById("studentForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
     const student = document.getElementById("studentSelect").value;
     const time = document.getElementById("time").value;
-
-  
 
     let range = null; // Initialise la variable range
     for (let i = 0; i < noms.length; i++) {
@@ -126,32 +124,32 @@
 
     if (range) { // Procède uniquement si une plage correspondante a été trouvée
     
-  fetch('https://sheetdb.io/api/v1/7ojj5lzk1krgz/hour/${range}', {
-    method: 'PATCH',
-    headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-        data: {
-            'hour': time
-        }
-    })
-       .then(response => {
+        fetch(`https://sheetdb.io/api/v1/7ojj5lzk1krgz/hour/${range}`, { // Utilisation de backticks pour interpoler la variable range
+            method: 'PATCH',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                data: {
+                    'hour': time
+                }
+            })
+        })
+        .then(response => {
             if (!response.ok) {
-               
+                throw new Error('Erreur lors de la mise à jour'); // Ajout d'une gestion des erreurs
             }
             return response.json();
         })
         .then(data => alert('Mise à jour réussie : ' + JSON.stringify(data)))
         .catch(error => alert('Erreur de soumission : ' + error));
-});
        
     } else {
         alert("Aucun étudiant trouvé avec ce nom.");
     }
 });
+</script>
 
-    </script>
 </body>
 </html>
