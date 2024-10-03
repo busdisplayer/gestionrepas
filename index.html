@@ -136,12 +136,6 @@
                 }
             })
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erreur lors de la mise à jour'); // Ajout d'une gestion des erreurs
-            }
-            return response.json();
-        })
         .then(data => alert('Mise à jour réussie : ' + JSON.stringify(data)))
         .catch(error => alert('Erreur de soumission : ' + error));
        
