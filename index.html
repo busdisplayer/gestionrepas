@@ -123,7 +123,7 @@
     }
 
     if (range) { // Procède uniquement si une plage correspondante a été trouvée
-    
+    console.log(time);
         fetch(`https://sheetdb.io/api/v1/7ojj5lzk1krgz/hour/${range}`, { // Utilisation de backticks pour interpoler la variable range
             method: 'PATCH',
             headers: {
