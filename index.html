@@ -137,8 +137,7 @@
             'hour': time
         }
     })
-});
-        .then(response => {
+       .then(response => {
             if (!response.ok) {
                
             }
@@ -146,6 +145,8 @@
         })
         .then(data => alert('Mise à jour réussie : ' + JSON.stringify(data)))
         .catch(error => alert('Erreur de soumission : ' + error));
+});
+       
     } else {
         alert("Aucun étudiant trouvé avec ce nom.");
     }
