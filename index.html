@@ -111,20 +111,22 @@
 
     const student = document.getElementById("studentSelect").value;
     const time = document.getElementById("time").value;
-
+const ligne = null;
+      
     let range = null; // Initialise la variable range
     for (let i = 0; i < noms.length; i++) {
         if (noms[i].toLowerCase().replace(/\s+/g, '_') === student) {
-            const ligne = i + 2; // Ajustement du numéro de ligne pour correspondre à l'indexation de la feuille de calcul
-            range = ligne; // Définit la plage uniquement si une correspondance est trouvée
+            ligne = i + 2; // Ajustement du numéro de ligne pour correspondre à l'indexation de la feuille de calcul
+             // Définit la plage uniquement si une correspondance est trouvée
             
             break; // Quitte la boucle après avoir trouvé la correspondance
         }
     }
 
-    if (range) { // Procède uniquement si une plage correspondante a été trouvée
+    if (ligne) { // Procède uniquement si une plage correspondante a été trouvée
     console.log(time);
-        fetch(`https://sheetdb.io/api/v1/7ojj5lzk1krgz/hour/${range}`, { // Utilisation de backticks pour interpoler la variable range
+    console.log(ligne);
+        fetch(`https://sheetdb.io/api/v1/7ojj5lzk1krgz/hour/${ligne}`, { // Utilisation de backticks pour interpoler la variable range
             method: 'PATCH',
             headers: {
                 'Accept': 'application/json',
