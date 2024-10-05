@@ -20,49 +20,7 @@
                 <br>
                 <button type="submit">Accéder au service</button>
             </form>
-           <script>
-    const storedUsername = localStorage.getItem('username'); 
-    if (storedUsername) {
-        document.querySelector('.login').style.display = "none";
-        document.querySelector('.content').style.display = "block";
-    } else {
-        document.querySelector('.login').style.display = "block";
-        document.querySelector('.content').style.display = "none";  
-    }
-
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Empêche le rechargement de la page
-        const password = document.getElementById('password').value;
-        
-        let credentials = {}; // Objet pour stocker les paires clé-valeur (mot de passe : nom d'utilisateur)
-        const url1 = "https://sheets.googleapis.com/v4/spreadsheets/1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4/values/Heures!A2:C?key=AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q"; // Récupère les colonnes A, B et C
-
-        fetch(url1)
-            .then(response => response.json())
-            .then(data => {
-                const values = data.values;
-                values.forEach(row => {
-                    if (row[1] && row[2]) { // Vérifie que les colonnes 1 et 2 existent
-                        const usernameB = row[1]; // Nom d'utilisateur
-                        const passwordB = row[2]; // Mot de passe
-                        credentials[passwordB] = usernameB; // Associe le mot de passe au nom d'utilisateur
-                    }
-                });
-
-                // Vérifie si le mot de passe saisi est dans les credentials
-                if (password in credentials) {
-                    const userconnected = credentials[password]; // Récupère le nom d'utilisateur associé au mot de passe
-                    localStorage.setItem('username', userconnected);   
-                    // Redirige ou met à jour l'interface après connexion réussie
-                    document.querySelector('.login').style.display = "none";
-                    document.querySelector('.content').style.display = "block";   
-                } else {
-                    alert("Le mot de passe ne correspond à aucune de nos bases de données, contactez le service central pour un nouveau mot de passe.");    
-                }
-            })
-            .catch(error => alert("Erreur de chargement: " + error)); // Gestion des erreurs de fetch
-    });
-</script>
+          
 
         </div>
     </div>
@@ -203,6 +161,49 @@ let ligne = null;
         alert("Aucun étudiant trouvé avec ce nom.");
     }
 });
+</script>
+         <script>
+    const storedUsername = localStorage.getItem('username'); 
+    if (storedUsername) {
+        document.querySelector('.login').style.display = "none";
+        document.querySelector('.content').style.display = "block";
+    } else {
+        document.querySelector('.login').style.display = "block";
+        document.querySelector('.content').style.display = "none";  
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Empêche le rechargement de la page
+        const password = document.getElementById('password').value;
+        
+        let credentials = {}; // Objet pour stocker les paires clé-valeur (mot de passe : nom d'utilisateur)
+        const url1 = "https://sheets.googleapis.com/v4/spreadsheets/1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4/values/Heures!A2:C?key=AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q"; // Récupère les colonnes A, B et C
+
+        fetch(url1)
+            .then(response => response.json())
+            .then(data => {
+                const values = data.values;
+                values.forEach(row => {
+                    if (row[1] && row[2]) { // Vérifie que les colonnes 1 et 2 existent
+                        const usernameB = row[1]; // Nom d'utilisateur
+                        const passwordB = row[2]; // Mot de passe
+                        credentials[passwordB] = usernameB; // Associe le mot de passe au nom d'utilisateur
+                    }
+                });
+
+                // Vérifie si le mot de passe saisi est dans les credentials
+                if (password in credentials) {
+                    const userconnected = credentials[password]; // Récupère le nom d'utilisateur associé au mot de passe
+                    localStorage.setItem('username', userconnected);   
+                    // Redirige ou met à jour l'interface après connexion réussie
+                    document.querySelector('.login').style.display = "none";
+                    document.querySelector('.content').style.display = "block";   
+                } else {
+                    alert("Le mot de passe ne correspond à aucune de nos bases de données, contactez le service central pour un nouveau mot de passe.");    
+                }
+            })
+            .catch(error => alert("Erreur de chargement: " + error)); // Gestion des erreurs de fetch
+    });
 </script>
     </div>
 
