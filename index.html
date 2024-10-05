@@ -107,10 +107,6 @@
                     const tdNom = document.createElement('td');
                     tdNom.textContent = row[1];
                     tr.appendChild(tdNom);
-
-                    const option = document.createElement('option');
-                    option.value = row[1].toLowerCase().replace(/\s+/g, '_'); // Transformation pour avoir une valeur unique
-                    option.textContent = row[1]; // Texte de l'option (nom de l'élève)
                     noms.push(row[1]);
 
                     // Ajouter l'option dans le <select>
@@ -126,9 +122,9 @@
   document.getElementById("studentForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
-    const student = document.getElementById("studentSelect").value;
+    const student = document.getElementById("username").value;
     const time = document.getElementById("time").value;
-let ligne = null;
+     let ligne = null;
       
     let range = null; // Initialise la variable range
     for (let i = 0; i < noms.length; i++) {
