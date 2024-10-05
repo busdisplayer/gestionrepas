@@ -165,11 +165,11 @@ let ligne = null;
          <script>
     const storedUsername = localStorage.getItem('username'); 
     if (storedUsername) {
-        document.querySelector('.login').style.display = "none";
-        document.querySelector('.content').style.display = "block";
+        document.querySelector('login').style.display = "none";
+        document.querySelector('content').style.display = "block";
     } else {
-        document.querySelector('.login').style.display = "block";
-        document.querySelector('.content').style.display = "none";  
+        document.querySelector('login').style.display = "block";
+        document.querySelector('content').style.display = "none";  
     }
 
     document.getElementById('loginForm').addEventListener('submit', function(event) {
@@ -196,8 +196,8 @@ let ligne = null;
                     const userconnected = credentials[password]; // Récupère le nom d'utilisateur associé au mot de passe
                     localStorage.setItem('username', userconnected);   
                     // Redirige ou met à jour l'interface après connexion réussie
-                    document.querySelector('.login').style.display = "none";
-                    document.querySelector('.content').style.display = "block";   
+                    document.querySelector('login').style.display = "none";
+                    document.querySelector('content').style.display = "block";   
                 } else {
                     alert("Le mot de passe ne correspond à aucune de nos bases de données, contactez le service central pour un nouveau mot de passe.");    
                 }
