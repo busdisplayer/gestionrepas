@@ -217,7 +217,7 @@
     
     // Si c'est samedi (6) ou dimanche (0) ou après 14h le vendredi (5)
     if (currentDay === 6 || currentDay === 0 || (currentDay === 5 && currentHour >= 14)) {
-        return "LUNDI"; // Prochain repas le lundi si c'est le week-end ou après vendredi 14h
+        return "Lundi"; // Prochain repas le lundi si c'est le week-end ou après vendredi 14h
     } else {
         // Calculer le jour suivant à partir de 14h
         const nextDay = new Date(now);
