@@ -136,7 +136,7 @@ let ligne = null;
         }
       })
       .then(response => {
-        window.history.back();
+        window.location.reload();
       })
       .catch(error => {
         alert('Erreur de soumission : ' + error);
