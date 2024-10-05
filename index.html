@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Page d'affichage des horaires des étudiants pour le repas">
     <title>Qui mange quand ?</title>
-    <link rel="shortcut icon" href="https://static.TRANSISEREV2.cityway.fr/Content/img/favicon/favicon-32x32.png">
+    <link rel="shortcut icon" href="https://tse1.mm.bing.net/th?id=OIP.hVasATYPBwYBvMQwuCDHRAHaIH&pid=Api">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <meta http-equiv="refresh" content="30">
 </head>
@@ -30,8 +30,10 @@
         <h1 class="w3-center"id="welcomeMessage"></h1>
     </div>
     <div class="w3-center w3-grey">
-     <p id="currentDateTime" class="w3-xlarge"></p>
-        <p id="nextLunch" class="w3-xlarge"></p>
+     <p id="currentDateTime" class="w3-xlarge"></p> 
+    </div>
+         <div class="w3-center w3-blue">
+            <p id="nextLunch" class="w3-xlarge"></p>
     </div>
     <script>
         // Fonction pour obtenir l'heure et la date actuelles et les afficher
@@ -228,7 +230,7 @@
         }
 
         // Récupère le nom complet du jour
-        const daysOfWeek = ["DIMANCHE", "LUNDI", "MARDI", "MERCREDI", "JEUDI", "VENDREDI", "SAMEDI"];
+        const daysOfWeek = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
         const nextDayName = daysOfWeek[nextDay.getDay()];
 
         return `Prochain repas : ${nextDayName}`;
@@ -238,7 +240,7 @@
 // Exemple d'utilisation
 const prochainRepas = getProchainRepas();
 console.log(prochainRepas); // Affiche par exemple "Prochain repas : LUNDI"
-nextLunch.textContent = `Repas de , ${prochainRepas}`;
+nextLunch.textContent = `Repas de ${prochainRepas}`;
 </script>
     </div>
 
