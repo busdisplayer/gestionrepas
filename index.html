@@ -136,7 +136,7 @@ let ligne = null;
         }
       })
       .then(response => {
-        alert('Mise à jour réussie : ' + JSON.stringify(response.data));
+        window.location.href = "busdisplayer.github.io/gestionrepas";
       })
       .catch(error => {
         alert('Erreur de soumission : ' + error);
