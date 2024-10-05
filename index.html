@@ -127,20 +127,20 @@ let ligne = null;
     if (ligne) { // Procède uniquement si une plage correspondante a été trouvée
     console.log(time);
     console.log(ligne);
-        fetch(`https://sheetdb.io/api/v1/7ojj5lzk1krgz/hour/${ligne}`, { // Utilisation de backticks pour interpoler la variable range
-            method: 'PATCH',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                data: {
-                    hour: time
-                }
-            })
-        })
-        .then(data => alert('Mise à jour réussie : ' + JSON.stringify(data)))
-        .catch(error => alert('Erreur de soumission : ' + error));
+    console.log(`Mise à jour pour ${ligne} à l'heure : ${time}`);
+
+      // Requête PATCH avec Axios
+      axios.patch(`https://sheetdb.io/api/v1/7ojj5lzk1krgz/name/${ligne}`, {
+        data: {
+          hour: time  // Mise à jour du champ "hour"
+        }
+      })
+      .then(response => {
+        alert('Mise à jour réussie : ' + JSON.stringify(response.data));
+      })
+      .catch(error => {
+        alert('Erreur de soumission : ' + error);
+      });
        
     } else {
         alert("Aucun étudiant trouvé avec ce nom.");
