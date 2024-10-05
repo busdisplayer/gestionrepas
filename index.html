@@ -130,7 +130,7 @@ let ligne = null;
     console.log(`Mise à jour pour ${ligne} à l'heure : ${time}`);
 
       // Requête PATCH avec Axios
-      axios.patch(`https://sheetdb.io/api/v1/7ojj5lzk1krgz/name/${ligne}`, {
+      axios.patch(`https://sheetdb.io/api/v1/7ojj5lzk1krgz/name/${student}`, {
         data: {
           hour: time  // Mise à jour du champ "hour"
         }
