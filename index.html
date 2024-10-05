@@ -10,7 +10,7 @@
     <meta http-equiv="refresh" content="30">
 </head>
 <body>
-    <div id="login" style="display:block">
+    <div class="login" style="display:block">
         <div class="w3-center w3-blue">
             <h1>Connectez-vous !</h1>
             <p>Service sécurisé, entrez votre mot de passe dans le formulaire ci-dessous pour être automatiquement authentifié(e)</p>
@@ -24,7 +24,7 @@
 
         </div>
     </div>
-    <div id="content" style="display:none">
+    <div class="content" style="display:none">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <div class="w3-blue">
     <h1 class="w3-center">Service en développement... Ouverture du site le 12 octobre 2024 !</h1>
@@ -165,11 +165,11 @@ let ligne = null;
          <script>
     const storedUsername = localStorage.getItem('username'); 
     if (storedUsername) {
-        document.querySelector('login').style.display = "none";
-        document.querySelector('content').style.display = "block";
+        document.querySelector('.login').style.display = "none";
+        document.querySelector('.content').style.display = "block";
     } else {
-        document.querySelector('login').style.display = "block";
-        document.querySelector('content').style.display = "none";  
+        document.querySelector('.login').style.display = "block";
+        document.querySelector('.content').style.display = "none";  
     }
 
     document.getElementById('loginForm').addEventListener('submit', function(event) {
@@ -196,8 +196,8 @@ let ligne = null;
                     const userconnected = credentials[password]; // Récupère le nom d'utilisateur associé au mot de passe
                     localStorage.setItem('username', userconnected);   
                     // Redirige ou met à jour l'interface après connexion réussie
-                    document.querySelector('login').style.display = "none";
-                    document.querySelector('content').style.display = "block";   
+                    document.querySelector('.login').style.display = "none";
+                    document.querySelector('.content').style.display = "block";   
                 } else {
                     alert("Le mot de passe ne correspond à aucune de nos bases de données, contactez le service central pour un nouveau mot de passe.");    
                 }
