@@ -207,6 +207,37 @@
             })
             .catch(error => alert("Erreur de chargement: " + error)); // Gestion des erreurs de fetch
     });
+    function getProchainRepas() {
+    const now = new Date();
+    const currentDay = now.getDay(); // 0 pour dimanche, 1 pour lundi, ..., 6 pour samedi
+    const currentHour = now.getHours();
+    
+    // Si c'est samedi (6) ou dimanche (0) ou après 14h le vendredi (5)
+    if (currentDay === 6 || currentDay === 0 || (currentDay === 5 && currentHour >= 14)) {
+        return "LUNDI"; // Prochain repas le lundi si c'est le week-end ou après vendredi 14h
+    } else {
+        // Calculer le jour suivant à partir de 14h
+        const nextDay = new Date(now);
+        nextDay.setDate(now.getDate() + 1); // Ajoute 1 jour
+
+        // Vérifie si c'est après 14h
+        if (currentHour >= 14) {
+            // Ajoute un jour supplémentaire si c'est après 14h
+            nextDay.setDate(nextDay.getDate() + 1);
+        }
+
+        // Récupère le nom complet du jour
+        const daysOfWeek = ["DIMANCHE", "LUNDI", "MARDI", "MERCREDI", "JEUDI", "VENDREDI", "SAMEDI"];
+        const nextDayName = daysOfWeek[nextDay.getDay()];
+
+        return `Prochain repas : ${nextDayName}`;
+    }
+}
+
+// Exemple d'utilisation
+const prochainRepas = getProchainRepas();
+console.log(prochainRepas); // Affiche par exemple "Prochain repas : MARDI"
+
 </script>
     </div>
 
