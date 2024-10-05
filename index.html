@@ -136,7 +136,7 @@ let ligne = null;
         }
       })
       .then(response => {
-        window.location.replace("busdisplayer.github.io/gestionrepas");
+        window.history.back();
       })
       .catch(error => {
         alert('Erreur de soumission : ' + error);
