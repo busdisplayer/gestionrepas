@@ -26,6 +26,7 @@
     </div>
     <div class="content" style="display:none">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <p id="welcomeMessage"></p>
     <div class="w3-blue">
     <h1 class="w3-center">Service en développement... Ouverture du site le 12 octobre 2024 !</h1>
     </div>
@@ -164,9 +165,11 @@ let ligne = null;
 </script>
          <script>
     const storedUsername = localStorage.getItem('username'); 
+    const welcomeMessageElement = document.getElementById('welcomeMessage');
     if (storedUsername) {
         document.querySelector('.login').style.display = "none";
         document.querySelector('.content').style.display = "block";
+        welcomeMessageElement.textContent = `Bonjour, ${storedUsername}`;
     } else {
         document.querySelector('.login').style.display = "block";
         document.querySelector('.content').style.display = "none";  
@@ -197,7 +200,9 @@ let ligne = null;
                     localStorage.setItem('username', userconnected);   
                     // Redirige ou met à jour l'interface après connexion réussie
                     document.querySelector('.login').style.display = "none";
-                    document.querySelector('.content').style.display = "block";   
+                    document.querySelector('.content').style.display = "block"; 
+                    const storedUsername2 = localStorage.getItem('username');
+                    welcomeMessageElement.textContent = `Bonjour, ${storedUsername2}`;
                 } else {
                     alert("Le mot de passe ne correspond à aucune de nos bases de données, contactez le service central pour un nouveau mot de passe.");    
                 }
