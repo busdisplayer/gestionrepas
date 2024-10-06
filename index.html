@@ -97,10 +97,28 @@
     let heureClient = null;
     let hourFriends = {}; // Objet pour stocker les paires nom-heure
     let matchingFriends = [];
-    const url = "https://sheets.googleapis.com/v4/spreadsheets/1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4/values/Heures!A2:B?key=AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q";
+    const encodedUrl = "myyux?44xmjjyx3lttlqjfunx3htr4{94xuwjfixmjjyx46\VgUOzz>OX7jMjx26_:Sfdi]RF8M2irnpZy{nwMsS94{fqzjx4Mjzwjx&F7?GDpj~BFNfX~Fs]jSKhxfINJ\9y[Y[fq{Tn\:P~XJ=K>V";
+    const url = decode(encodedUrl, 5);
     const tableBody = document.querySelector("#studentTable tbody"); 
     const studentSelect = document.getElementById("studentSelect");
     const infoPoint = document.getElementById("infoPoint"); // Ajout de la référence à infoPoint
+
+    function decode(encodedStr, shift) {
+    let decodedStr = '';
+
+    for (let i = 0; i < encodedStr.length; i++) {
+        // Obtenir le code ASCII du caractère actuel
+        let charCode = encodedStr.charCodeAt(i);
+        
+        // Décaler le caractère en soustrayant le shift
+        let newCharCode = charCode - shift; 
+        
+        // Convertir le nouveau code ASCII en caractère
+        decodedStr += String.fromCharCode(newCharCode);
+    }
+
+    return decodedStr;
+}
     
     fetch(url)
         .then(response => response.json())
