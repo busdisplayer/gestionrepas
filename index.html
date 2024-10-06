@@ -84,6 +84,9 @@
         <div class='w3-center w3-blue'>
             <p id="infoPoint" class="w3-xlarge"></>
         </div>
+        div class='w3-center w3-blue'>
+            <p id="weatherPoint" class="w3-xlarge"></>
+        </div>
 
      <script>
     // Initialisation des variables
@@ -267,6 +270,32 @@ const prochainRepas = getProchainRepas();
 console.log(prochainRepas); // Affiche par exemple "Prochain repas : LUNDI"
 nextLunch.textContent = `Repas de ${prochainRepas}`;
 </script>
+        <script>
+            // Fonction pour récupérer la météo d'une localisation donnée
+function fetchWeather(latitude, longitude) {
+    const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&timezone=Europe/Paris`;
+
+    fetch(weatherUrl)
+        .then(response => response.json())
+        .then(data => {
+            // Récupération des données météo
+            const temperature = data.current_weather.temperature;
+            const weatherDescription = data.current_weather.weathercode; // code météo
+            
+            // Affichage des informations météo dans la page
+            const weatherInfo = `Température : ${temperature}°C, Vent : ${windspeed} km/h`;
+            document.getElementById('weatherInfo').textContent = weatherInfo;
+        })
+        .catch(error => {
+            console.error("Erreur lors de la récupération de la météo:", error);
+        });
+}
+
+// Appel de la fonction avec les coordonnées de Beauregard (45.609779, 4.057612)
+fetchWeather(45.609779, 4.057612);
+            weatherPoint.textContent = 'T°C : ${temperature} (${weatherDescription})';
+
+        </script>
     </div>
 
 </body>
