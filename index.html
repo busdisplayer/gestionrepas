@@ -160,6 +160,10 @@ console.log("URL décodée :", url);
                 }
                 
                 tr.appendChild(tdNom);
+
+                const tdUpdated = document.createElement('td');
+                tdUpdated.textContent = row[3];
+                tr.appendChild(trUpdated);
                 
                 // Ajoute le nom à la liste et la paire nom-heure à hourFriends
                 noms.push(row[1]);
