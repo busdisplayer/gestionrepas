@@ -193,11 +193,11 @@ console.log("URL décodée :", url);
     // Construire le message dans la variable infrom
     let infrom;
     if (diffMinutes > 0) {
-        infrom = `il y a ${diffMinutes} minute(s)`;
+        infrom = ``;
     } else if (diffMinutes < 0) {
-        infrom = `dans ${Math.abs(diffMinutes)} minute(s)`;
+        infrom = `(dans ${Math.abs(diffMinutes)} minute(s))`;
     } else {
-        infrom = `Il est exactement ${fixedTime}.`;
+        infrom = ``;
     }
 
     return infrom; // Retourner le message
@@ -207,7 +207,7 @@ console.log("URL décodée :", url);
 const message = compareTime();
 
             // Met à jour infoPoint avec le résultat final
-            infoPoint.textContent = `Vous mangez à ${heureClient.replace(":", "h") || "inconnue"}  (${message}) avec ${matchingFriends.length > 0 ? matchingFriends.join(", ") : "personne"}.`;
+            infoPoint.textContent = `Vous mangez à ${heureClient.replace(":", "h") || "inconnue"}  ${message} avec ${matchingFriends.length > 0 ? matchingFriends.join(", ") : "personne"}.`;
         })
         .catch(error => console.log("Erreur de chargement: " + error));
 
