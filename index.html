@@ -86,57 +86,67 @@
         </div>
 
      <script>
-        // Script qui fait la requête API et upload les listes
-        let noms = [];
-        let heureClient = null;
-        let hourFriends = [];
-         let matchingFriends = [];
-        const url = "https://sheets.googleapis.com/v4/spreadsheets/1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4/values/Heures!A2:B?key=AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q";
-        const tableBody = document.querySelector("#studentTable tbody"); 
-        const studentSelect = document.getElementById("studentSelect");
-        
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                const values = data.values;
-                values.forEach(row => {
-                    const tr = document.createElement('tr');
-                    
-                    const tdHeure = document.createElement('td');
-                    tdHeure.textContent = row[0];
-                    tr.appendChild(tdHeure);
-                    
-                 const tdNom = document.createElement('td');
-
-                // Vérifiez que storedUsername n'est pas null et que row[1] existe
+    // Initialisation des variables
+    let noms = [];
+    let heureClient = null;
+    let hourFriends = {}; // Objet pour stocker les paires nom-heure
+    let matchingFriends = [];
+    const url = "https://sheets.googleapis.com/v4/spreadsheets/1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4/values/Heures!A2:B?key=AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q";
+    const tableBody = document.querySelector("#studentTable tbody"); 
+    const studentSelect = document.getElementById("studentSelect");
+    const infoPoint = document.getElementById("infoPoint"); // Ajout de la référence à infoPoint
+    
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            const values = data.values;
+            values.forEach(row => {
+                const tr = document.createElement('tr');
+                
+                // Création des cellules pour l'heure et le nom
+                const tdHeure = document.createElement('td');
+                tdHeure.textContent = row[0];
+                tr.appendChild(tdHeure);
+                
+                const tdNom = document.createElement('td');
+                
+                // Vérifie que storedUsername n'est pas null et que row[1] existe
                 if (storedUsername && row[1]) {
                     // Comparaison insensible à la casse
                     if (row[1].toLowerCase() === storedUsername.toLowerCase()) {
-                        tdNom.textContent = "Moi"; // Si c'est le même utilisateur, affiche "Moi"
-                        heureClient = row[0]
+                        tdNom.textContent = "Moi"; // Si c'est l'utilisateur courant
+                        heureClient = row[0]; // Stocke l'heure de l'utilisateur
                     } else {
-                        tdNom.textContent = row[1]; // Sinon, affiche le nom de l'utilisateur
+                        tdNom.textContent = row[1]; // Affiche le nom de l'utilisateur
                     }
                 } else {
-                    tdNom.textContent = row[1] || ""; // Si row[1] n'existe pas, on affiche une chaîne vide
+                    tdNom.textContent = row[1] || ""; // Si row[1] est vide, on affiche une chaîne vide
                 }
-                    tr.appendChild(tdNom);
-                    noms.push(row[1]);
-                    hourFriends[row[1]] = row[0];
-                    console.log(hourFriends);
-                    tableBody.appendChild(tr);
-                });
-            })
-            .catch(error => alert("Erreur de chargement: " + error));
+                
+                tr.appendChild(tdNom);
+                
+                // Ajoute le nom à la liste et la paire nom-heure à hourFriends
+                noms.push(row[1]);
+                hourFriends[row[1]] = row[0];
+                
+                // Ajoute la ligne au tableau
+                tableBody.appendChild(tr);
+            });
 
-         for(let name in hourFriends) {
-             if (hourFriends[name] === heureClient) {
-                 matchingFriends.push(name);
-             }
-         }
-         infoPoint.textContent = `Vous mangez à ${heureClient} avec ${matchingFriends.join(", ")} !`;
+            // Une fois les données chargées, compare l'heure de l'utilisateur avec celles des autres amis
+            for (let name in hourFriends) {
+                if (hourFriends[name] === heureClient && name !== storedUsername) {
+                    matchingFriends.push(name);
+                }
+            }
 
-    </script>
+            // Met à jour infoPoint avec le résultat final
+            infoPoint.textContent = `Vous mangez à ${heureClient || "inconnue"} avec ${matchingFriends.length > 0 ? matchingFriends.join(", ") : "personne"} !`;
+        })
+        .catch(error => alert("Erreur de chargement: " + error));
+
+</script>
+
 
  <script>
   document.getElementById("studentForm").addEventListener("submit", function(event) {
