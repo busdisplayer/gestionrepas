@@ -97,13 +97,8 @@
     let heureClient = null;
     let hourFriends = {}; // Objet pour stocker les paires nom-heure
     let matchingFriends = [];
-    const encodedUrl = "myyux?44xmjjyx3lttlqjfunx3htr4{94xuwjfixmjjyx46\VgUOzz>OX7jMjx26_:Sfdi]RF8M2irnpZy{nwMsS94{fqzjx4Mjzwjx&F7?GDpj~BFNfX~Fs]jSKhxfINJ\9y[Y[fq{Tn\:P~XJ=K>V";
-    const url = decode(encodedUrl, 5);
-    const tableBody = document.querySelector("#studentTable tbody"); 
-    const studentSelect = document.getElementById("studentSelect");
-    const infoPoint = document.getElementById("infoPoint"); // Ajout de la référence à infoPoint
-
-    function decode(encodedStr, shift) {
+   // Fonction pour décoder une chaîne encodée
+function decode(encodedStr, shift) {
     let decodedStr = '';
 
     for (let i = 0; i < encodedStr.length; i++) {
@@ -119,6 +114,21 @@
 
     return decodedStr;
 }
+
+// URL encodée à décoder
+const encodedUrl = "myyux?44xmjjyx3lttlqjfunx3htr4{94xuwjfixmjjyx46\\VgUOzz>OX7jMjx26_:Sfdi]RF8M2irnpZy{nwMsS94{fqzjx4Mjzwjx&F7?GDpj~BFNfX~Fs]jSKhxfINJ\\9y[Y[fq{Tn\\:P~XJ=K>V";
+
+// Décodage de l'URL
+const url = decode(encodedUrl, 5);
+
+// Sélecteurs DOM
+const tableBody = document.querySelector("#studentTable tbody"); 
+const studentSelect = document.getElementById("studentSelect");
+const infoPoint = document.getElementById("infoPoint"); // Ajout de la référence à infoPoint
+
+// Log de l'URL décodée (facultatif)
+console.log("URL décodée :", url);
+
     
     fetch(url)
         .then(response => response.json())
