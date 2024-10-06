@@ -240,7 +240,8 @@ const message = compareTime();
       // Requête PATCH avec Axios
       axios.patch(`https://sheetdb.io/api/v1/7ojj5lzk1krgz/name/${student}`, {
         data: {
-          hour: time  // Mise à jour du champ "hour"
+          hour: time,  // Mise à jour du champ "hour"
+          updated: new Date();
         }
       })
       .then(response => {
