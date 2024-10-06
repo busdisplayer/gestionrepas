@@ -193,9 +193,9 @@ console.log("URL décodée :", url);
     // Construire le message dans la variable infrom
     let infrom;
     if (diffMinutes > 0) {
-        infrom = `Il y a ${diffMinutes} minute(s) après ${fixedTime}.`;
+        infrom = `il y a ${diffMinutes} minute(s)`;
     } else if (diffMinutes < 0) {
-        infrom = `Dans ${Math.abs(diffMinutes)} minute(s) avant ${fixedTime}.`;
+        infrom = `dans ${Math.abs(diffMinutes)} minute(s)`;
     } else {
         infrom = `Il est exactement ${fixedTime}.`;
     }
