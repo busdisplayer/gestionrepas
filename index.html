@@ -285,13 +285,16 @@ function fetchWeather(latitude, longitude) {
             const temperature = data.current_weather.temperature;
             const weatherDescription = data.current_weather.weathercode; // code météo
             const windspeed = data.current_weather.windspeed;
+            const weatherCode = data.current_weather.weathercode;
+            const wmoCodes = ["Ensoleillé", "Partiellement nuageux", "Nuageux", "Pluie légère", "Pluie modérée", "Pluie forte", "Neige légère", "Neige modérée", "Neige forte", "Brouillard", "Tempête de neige", "Orage", "Tempête"];
+            let weatherStatus = wmoCodes[weatherCode];
             if (data.current_weather.is_day === 1) {
                 dynamicImage.src = "https://cdn.pixabay.com/photo/2016/11/01/21/07/sun-1789653_640.png";
             } else {
                 dynamicImage.src = "https://cdn.pixabay.com/photo/2016/12/10/19/38/moon-1898047_960_720.png";
             }
             // Affichage des informations météo dans la page
-            const weatherInfo = `${temperature}°C`;
+            const weatherInfo = `${temperature}°C (${weatherStatus})`;
             document.getElementById('weatherPoint').textContent = weatherInfo;
         })
         .catch(error => {
