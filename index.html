@@ -284,7 +284,7 @@ function fetchWeather(latitude, longitude) {
             
             // Affichage des informations météo dans la page
             const weatherInfo = `Température : ${temperature}°C, Vent : ${windspeed} km/h`;
-            document.getElementById('weatherInfo').textContent = weatherInfo;
+            document.getElementById('weatherPoint').textContent = weatherInfo;
         })
         .catch(error => {
             console.error("Erreur lors de la récupération de la météo:", error);
@@ -293,8 +293,6 @@ function fetchWeather(latitude, longitude) {
 
 // Appel de la fonction avec les coordonnées de Beauregard (45.609779, 4.057612)
 fetchWeather(45.609779, 4.057612);
-            weatherPoint.textContent = 'T°C : ${temperature} (${weatherDescription})';
-
         </script>
     </div>
 
