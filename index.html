@@ -173,9 +173,41 @@ console.log("URL décodée :", url);
                     matchingFriends.push(name);
                 }
             }
+             function compareTime() {
+    // Heure fixe (12:00)
+    const fixedTime = heureClient;
+    const [fixedHours, fixedMinutes] = fixedTime.split(":").map(Number);
+
+    // Récupérer l'heure actuelle
+    const currentTime = new Date();
+    const currentHours = currentTime.getHours();
+    const currentMinutes = currentTime.getMinutes();
+
+    // Calculer le total de minutes pour l'heure actuelle et l'heure fixe
+    const totalCurrentMinutes = currentHours * 60 + currentMinutes;
+    const totalFixedMinutes = fixedHours * 60 + fixedMinutes;
+
+    // Calculer la différence en minutes
+    const diffMinutes = totalCurrentMinutes - totalFixedMinutes;
+
+    // Construire le message dans la variable infrom
+    let infrom;
+    if (diffMinutes > 0) {
+        infrom = `Il y a ${diffMinutes} minute(s) après ${fixedTime}.`;
+    } else if (diffMinutes < 0) {
+        infrom = `Dans ${Math.abs(diffMinutes)} minute(s) avant ${fixedTime}.`;
+    } else {
+        infrom = `Il est exactement ${fixedTime}.`;
+    }
+
+    return infrom; // Retourner le message
+}
+
+// Exemple d'utilisation
+const message = compareTime();
 
             // Met à jour infoPoint avec le résultat final
-            infoPoint.textContent = `Vous mangez à ${heureClient.replace(":", "h") || "inconnue"} avec ${matchingFriends.length > 0 ? matchingFriends.join(", ") : "personne"}.`;
+            infoPoint.textContent = `Vous mangez à ${heureClient.replace(":", "h") || "inconnue"}  (${message}) avec ${matchingFriends.length > 0 ? matchingFriends.join(", ") : "personne"}.`;
         })
         .catch(error => console.log("Erreur de chargement: " + error));
 
