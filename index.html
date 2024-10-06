@@ -281,6 +281,7 @@ function fetchWeather(latitude, longitude) {
             // Récupération des données météo
             const temperature = data.current_weather.temperature;
             const weatherDescription = data.current_weather.weathercode; // code météo
+            const windspeed = data.current_weather.windspeed;
             
             // Affichage des informations météo dans la page
             const weatherInfo = `Température : ${temperature}°C, Vent : ${windspeed} km/h`;
