@@ -235,6 +235,7 @@
                     document.querySelector('.content').style.display = "block"; 
                     const storedUsername2 = localStorage.getItem('username');
                     welcomeMessageElement.textContent = `Bonjour, ${storedUsername2}`;
+                    window.location.reload();
                 } else {
                     alert("Le mot de passe ne correspond à aucune de nos bases de données, contactez le service central pour un nouveau mot de passe.");    
                 }
