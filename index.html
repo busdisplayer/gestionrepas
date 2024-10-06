@@ -81,10 +81,16 @@
             <button type="submit" class="w3-button w3-blue w3-margin-top w3-round">Transmettre</button>
         </form>
     </div>
+        <div class='w3-center w3-grey'>
+            <p id="infoPoint"></p>
+        </div>
 
      <script>
         // Script qui fait la requête API et upload les listes
         let noms = [];
+        let heureClient = null;
+        let hourFriends = [];
+         let matchingFriends = [];
         const url = "https://sheets.googleapis.com/v4/spreadsheets/1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4/values/Heures!A2:B?key=AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q";
         const tableBody = document.querySelector("#studentTable tbody"); 
         const studentSelect = document.getElementById("studentSelect");
@@ -107,6 +113,7 @@
                     // Comparaison insensible à la casse
                     if (row[1].toLowerCase() === storedUsername.toLowerCase()) {
                         tdNom.textContent = "Moi"; // Si c'est le même utilisateur, affiche "Moi"
+                        heureClient = row[0]
                     } else {
                         tdNom.textContent = row[1]; // Sinon, affiche le nom de l'utilisateur
                     }
@@ -115,12 +122,20 @@
                 }
                     tr.appendChild(tdNom);
                     noms.push(row[1]);
-
-            
+                    hourFriends[row[1]] = row[0];
+                    console.log(hourFriends);
                     tableBody.appendChild(tr);
                 });
             })
             .catch(error => alert("Erreur de chargement: " + error));
+
+         for(let name in hourFriends) {
+             if (hourFriends[name] === heureClient) {
+                 matchingFriends.push(name);
+             }
+         }
+         infoPoint.textContent = "Vous mangez à ${heureClient} avec ${matchingFriends} !";
+         
     </script>
 
  <script>
