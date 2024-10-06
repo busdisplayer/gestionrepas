@@ -87,6 +87,9 @@
         <div class='w3-center w3-green'>
             <p id="weatherPoint" class="w3-xlarge"></p>
         </div>
+        <div class='w3-center w3-blue'>
+            <img id="dynamicImage" src="https://cdn.pixabay.com/photo/2016/12/10/19/38/moon-1898047_1280.png" style="width: 50%; height: auto;"></img>
+        </div>
 
      <script>
     // Initialisation des variables
@@ -282,7 +285,11 @@ function fetchWeather(latitude, longitude) {
             const temperature = data.current_weather.temperature;
             const weatherDescription = data.current_weather.weathercode; // code météo
             const windspeed = data.current_weather.windspeed;
-            
+            if (data.current_weather.is_day === 1) {
+                dynamicImage.src = "https://cdn.pixabay.com/photo/2016/11/01/21/07/sun-1789653_640.png";
+            } else {
+                dynamicImage.src = "https://cdn.pixabay.com/photo/2016/12/10/19/38/moon-1898047_960_720.png";
+            }
             // Affichage des informations météo dans la page
             const weatherInfo = `${temperature}°C`;
             document.getElementById('weatherPoint').textContent = weatherInfo;
