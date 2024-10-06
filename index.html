@@ -141,7 +141,7 @@
             }
 
             // Met à jour infoPoint avec le résultat final
-            infoPoint.textContent = `Vous mangez à ${heureClient || "inconnue"} avec ${matchingFriends.length > 0 ? matchingFriends.join(", ") : "personne"} !`;
+            infoPoint.textContent = `Vous mangez à ${heureClient.replace(":", "h") || "inconnue"} avec ${matchingFriends.length > 0 ? matchingFriends.join(", ") : "personne"} !`;
         })
         .catch(error => alert("Erreur de chargement: " + error));
 
