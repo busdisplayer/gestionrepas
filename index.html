@@ -36,6 +36,7 @@
             <p id="nextLunch" class="w3-xlarge"></p>
     </div>
     <script>
+        const updatedTime = null;
         // Fonction pour obtenir l'heure et la date actuelles et les afficher
         function updateDateTime() {
             const now = new Date();
@@ -43,6 +44,7 @@
 
             const date = now.toLocaleDateString('fr-FR', options);
             const time = now.toLocaleTimeString('fr-FR');
+            updatedTime = date;
 
             document.getElementById('currentDateTime').textContent = time;
         }
@@ -240,7 +242,8 @@ const message = compareTime();
       // Requête PATCH avec Axios
       axios.patch(`https://sheetdb.io/api/v1/7ojj5lzk1krgz/name/${student}`, {
         data: {
-          hour: time  // Mise à jour du champ "hour"
+          hour: time, // Mise à jour du champ "hour"
+        updated: updatedTime;
         }
       })
       .then(response => {
