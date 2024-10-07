@@ -72,6 +72,49 @@
          <div class="w3-center w3-blue">
             <p id="nextLunch" class="w3-xlarge"></p>
     </div>
+         <script>
+            // Fonction pour récupérer la météo d'une localisation donnée
+function fetchWeather(latitude, longitude) {
+    const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&timezone=Europe/Paris`;
+let isday = null;
+    fetch(weatherUrl)
+        .then(response => response.json())
+        .then(data => {
+            // Récupération des données météo
+            const temperature = data.current_weather.temperature;
+            const weatherDescription = data.current_weather.weathercode; // code météo
+            const windspeed = data.current_weather.windspeed;
+            const weatherCode = data.current_weather.weathercode;
+            isday = data.current_weather.is_day;
+            const wmoCodes = ["Ciel dégagé", "Principalement dégagé", "Partiellement nuageux", "Nuageux", "Couvert", "Voilé", "Voilé avec éclaircies", "Brouillard", "Fumée", "Tempête de poussière ou de sable", "Bruine légère", "Bruine modérée", "Bruine forte", "Pluie légère", "Pluie modérée", "Pluie forte", "Pluie verglaçante légère", "Pluie verglaçante forte", "Pluie ou bruine mêlée de neige légère", "Neige légère", "Neige modérée", "Neige forte", "Chute de neige avec pluie", "Grésil", "Averses légères de pluie", "Averses modérées de pluie", "Averses violentes de pluie", "Averses légères de neige", "Averses modérées de neige", "Averses violentes de neige", "Orage faible ou modéré", "Orage avec grêle faible", "Orage avec grêle fort", "Tempête de neige", "Chaleur accablante", "Canicule", "Froid extrême", "Vent faible", "Vent modéré", "Vent fort", "Tempête de sable", "Inondation", "Gel", "Glace", "Conditions de brouillard de glace", "Conditions de neige", "Tempête d'orage", "Condition d'inondation", "Conditions de brouillard givrant", "Conditions de neige givrante", "Autres conditions", "Temps non défini", "Visibilité réduite", "Conditions d'orage avec grêle", "Conditions climatiques extrêmes", "Conditions environnementales non classifiées", "Conditions d'alerte météo", "Conditions de vent violent", "Tempête de neige violente", "Tempête de sable violente", "Conditions de chaleur extrême", "Conditions de froid extrême", "Conditions de chaleur suffocante", "Conditions de froid suffocant", "Conditions de vent extrêmement fort", "Conditions de pluie faible et humide", "Conditions de pluie modérée et humide", "Conditions de pluie forte et humide", "Conditions de neige légère et humide", "Conditions de neige modérée et humide", "Conditions de neige forte et humide", "Conditions de grêle légère et humide", "Conditions de grêle modérée et humide", "Conditions de grêle forte et humide", "Conditions de pluie et neige", "Conditions de pluie et grêle", "Conditions de neige et grêle", "Conditions de pluie et brouillard", "Conditions de neige et brouillard", "Conditions de grêle et brouillard", "Conditions de neige et vent", "Conditions de pluie et vent", "Conditions de chaleur et vent", "Conditions de froid et vent", "Conditions de chaleur et humidité", "Conditions de froid et humidité", "Conditions de vent et humidité", "Conditions de chaleur et neige", "Conditions de froid et neige", "Conditions de chaleur et brouillard", "Conditions de froid et brouillard", "Conditions de chaleur extrême et brouillard", "Conditions de froid extrême et brouillard", "Conditions de chaleur extrême et vent", "Conditions de froid extrême et vent", "Conditions d'alerte météo extrêmes", "Conditions climatiques extrêmes", "Conditions environnementales extrêmes", "Conditions d'alerte à la chaleur", "Conditions d'alerte à la froid"];
+            let weatherStatus = wmoCodes[weatherCode];
+            console.log(weatherStatus);
+            console.log(weatherCode);
+            if (data.current_weather.is_day === 1) {
+                dynamicImage.src = "https://cdn.pixabay.com/photo/2016/11/01/21/07/sun-1789653_640.png";
+                
+            } else {
+                dynamicImage.src = "https://cdn.pixabay.com/photo/2016/12/10/19/38/moon-1898047_960_720.png";
+            }
+            // Affichage des informations météo dans la page
+            const weatherInfo = `${temperature}°C (${weatherStatus})`;
+            document.getElementById('weatherPoint').textContent = weatherInfo;
+        })
+        .catch(error => {
+            console.error("Erreur lors de la récupération de la météo:", error);
+        });
+}
+
+// Appel de la fonction avec les coordonnées de Beauregard (45.609779, 4.057612)
+fetchWeather(45.609779, 4.057612);
+        </script>
+         <script>
+        function deleteUsername() {
+            // Supprime la clé 'username' du localStorage
+            localStorage.removeItem('username');
+            window.location.reload();
+        }
+    </script>
     <script>
         let updatedTime = null;
         // Fonction pour obtenir l'heure et la date actuelles et les afficher
@@ -302,12 +345,18 @@ const message = compareTime();
 });
 </script>
          <script>
+    let daynight = null;
+             if (isday) {
+                 daynight = "Bonjour";
+             } else {
+                 daynight = "Bonsoir";
+             }
     const storedUsername = localStorage.getItem('username'); 
     const welcomeMessageElement = document.getElementById('welcomeMessage');
     if (storedUsername) {
         document.querySelector('.login').style.display = "none";
         document.querySelector('.content').style.display = "block";
-        welcomeMessageElement.textContent = `Bonjour, ${storedUsername}`;
+        welcomeMessageElement.textContent = `${daynight}, ${storedUsername}`;
     } else {
         document.querySelector('.login').style.display = "block";
         document.querySelector('.content').style.display = "none";  
@@ -381,47 +430,7 @@ const prochainRepas = getProchainRepas();
 console.log(prochainRepas); // Affiche par exemple "Prochain repas : LUNDI"
 nextLunch.textContent = `Repas de ${prochainRepas}`;
 </script>
-        <script>
-            // Fonction pour récupérer la météo d'une localisation donnée
-function fetchWeather(latitude, longitude) {
-    const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&timezone=Europe/Paris`;
-
-    fetch(weatherUrl)
-        .then(response => response.json())
-        .then(data => {
-            // Récupération des données météo
-            const temperature = data.current_weather.temperature;
-            const weatherDescription = data.current_weather.weathercode; // code météo
-            const windspeed = data.current_weather.windspeed;
-            const weatherCode = data.current_weather.weathercode;
-            const wmoCodes = ["Ciel dégagé", "Principalement dégagé", "Partiellement nuageux", "Nuageux", "Couvert", "Voilé", "Voilé avec éclaircies", "Brouillard", "Fumée", "Tempête de poussière ou de sable", "Bruine légère", "Bruine modérée", "Bruine forte", "Pluie légère", "Pluie modérée", "Pluie forte", "Pluie verglaçante légère", "Pluie verglaçante forte", "Pluie ou bruine mêlée de neige légère", "Neige légère", "Neige modérée", "Neige forte", "Chute de neige avec pluie", "Grésil", "Averses légères de pluie", "Averses modérées de pluie", "Averses violentes de pluie", "Averses légères de neige", "Averses modérées de neige", "Averses violentes de neige", "Orage faible ou modéré", "Orage avec grêle faible", "Orage avec grêle fort", "Tempête de neige", "Chaleur accablante", "Canicule", "Froid extrême", "Vent faible", "Vent modéré", "Vent fort", "Tempête de sable", "Inondation", "Gel", "Glace", "Conditions de brouillard de glace", "Conditions de neige", "Tempête d'orage", "Condition d'inondation", "Conditions de brouillard givrant", "Conditions de neige givrante", "Autres conditions", "Temps non défini", "Visibilité réduite", "Conditions d'orage avec grêle", "Conditions climatiques extrêmes", "Conditions environnementales non classifiées", "Conditions d'alerte météo", "Conditions de vent violent", "Tempête de neige violente", "Tempête de sable violente", "Conditions de chaleur extrême", "Conditions de froid extrême", "Conditions de chaleur suffocante", "Conditions de froid suffocant", "Conditions de vent extrêmement fort", "Conditions de pluie faible et humide", "Conditions de pluie modérée et humide", "Conditions de pluie forte et humide", "Conditions de neige légère et humide", "Conditions de neige modérée et humide", "Conditions de neige forte et humide", "Conditions de grêle légère et humide", "Conditions de grêle modérée et humide", "Conditions de grêle forte et humide", "Conditions de pluie et neige", "Conditions de pluie et grêle", "Conditions de neige et grêle", "Conditions de pluie et brouillard", "Conditions de neige et brouillard", "Conditions de grêle et brouillard", "Conditions de neige et vent", "Conditions de pluie et vent", "Conditions de chaleur et vent", "Conditions de froid et vent", "Conditions de chaleur et humidité", "Conditions de froid et humidité", "Conditions de vent et humidité", "Conditions de chaleur et neige", "Conditions de froid et neige", "Conditions de chaleur et brouillard", "Conditions de froid et brouillard", "Conditions de chaleur extrême et brouillard", "Conditions de froid extrême et brouillard", "Conditions de chaleur extrême et vent", "Conditions de froid extrême et vent", "Conditions d'alerte météo extrêmes", "Conditions climatiques extrêmes", "Conditions environnementales extrêmes", "Conditions d'alerte à la chaleur", "Conditions d'alerte à la froid"];
-            let weatherStatus = wmoCodes[weatherCode];
-            console.log(weatherStatus);
-            console.log(weatherCode);
-            if (data.current_weather.is_day === 1) {
-                dynamicImage.src = "https://cdn.pixabay.com/photo/2016/11/01/21/07/sun-1789653_640.png";
-            } else {
-                dynamicImage.src = "https://cdn.pixabay.com/photo/2016/12/10/19/38/moon-1898047_960_720.png";
-            }
-            // Affichage des informations météo dans la page
-            const weatherInfo = `${temperature}°C (${weatherStatus})`;
-            document.getElementById('weatherPoint').textContent = weatherInfo;
-        })
-        .catch(error => {
-            console.error("Erreur lors de la récupération de la météo:", error);
-        });
-}
-
-// Appel de la fonction avec les coordonnées de Beauregard (45.609779, 4.057612)
-fetchWeather(45.609779, 4.057612);
-        </script>
-         <script>
-        function deleteUsername() {
-            // Supprime la clé 'username' du localStorage
-            localStorage.removeItem('username');
-            window.location.reload();
-        }
-    </script>
+       
     </div>
 
 </body>
