@@ -321,7 +321,7 @@ const message = compareTime();
     } else {
         // Calculer le jour suivant à partir de 14h
         const nextDay = new Date(now);
-        nextDay.setDate(now.getDate() + 1); // Ajoute 1 jour
+        nextDay.setDate(now.getDate()); // Ajoute 1 jour
 
         // Vérifie si c'est après 14h
         if (currentHour >= 14) {
