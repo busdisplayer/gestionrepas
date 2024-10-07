@@ -73,10 +73,10 @@
             <p id="nextLunch" class="w3-xlarge"></p>
     </div>
          <script>
+             let isday = null;
             // Fonction pour récupérer la météo d'une localisation donnée
 function fetchWeather(latitude, longitude) {
     const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&timezone=Europe/Paris`;
-let isday = null;
     fetch(weatherUrl)
         .then(response => response.json())
         .then(data => {
