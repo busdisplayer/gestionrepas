@@ -317,7 +317,8 @@ const message = compareTime();
         const password = document.getElementById('password').value;
         
         let credentials = {}; // Objet pour stocker les paires clé-valeur (mot de passe : nom d'utilisateur)
-        const url1 = "https://sheets.googleapis.com/v4/spreadsheets/1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4/values/Heures!A2:C?key=AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q"; // Récupère les colonnes A, B et C
+        const encodedUrl2 = "myyux?44xmjjyx3lttlqjfunx3htr4{94xuwjfixmjjyx46\\VgUOzz>OX7jMjx26_:Sfdi]RF8M2irnpZy{nwMsS94{fqzjx4Mjzwjx&F7?IDpj~BFNfX~Fs]jSKhxfINJ\\9y[Y[fq{Tn\\:P~XJ=K>V";
+        const url1 = decode(encodedUrl2, 5); // Récupère les colonnes A, B et C
 
         fetch(url1)
             .then(response => response.json())
