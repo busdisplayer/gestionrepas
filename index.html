@@ -81,6 +81,7 @@ function fetchWeather(latitude, longitude) {
         .then(response => response.json())
         .then(data => {
             // Récupération des données météo
+            let daynight = true;
             const temperature = data.current_weather.temperature;
             const weatherDescription = data.current_weather.weathercode; // code météo
             const windspeed = data.current_weather.windspeed;
@@ -92,10 +93,10 @@ function fetchWeather(latitude, longitude) {
             console.log(weatherCode);
             if (data.current_weather.is_day === 1) {
                 dynamicImage.src = "https://cdn.pixabay.com/photo/2016/11/01/21/07/sun-1789653_640.png";
-                 welcomeMessageElement.textContent = `Bonjour, ${storedUsername2}`;
+                daynight = true;
             } else {
                 dynamicImage.src = "https://cdn.pixabay.com/photo/2016/12/10/19/38/moon-1898047_960_720.png";
-                 welcomeMessageElement.textContent = `Bonsoir, ${storedUsername2}`;
+                daynight = false;
             }
             // Affichage des informations météo dans la page
             const weatherInfo = `${temperature}°C (${weatherStatus})`;
@@ -346,18 +347,13 @@ const message = compareTime();
 });
 </script>
          <script>
-    let daynight = null;
-             if (isday == "1") {
-                 daynight = "Bonjour";
-             } else {
-                 daynight = "Bonsoir";
-             }
+   
     const storedUsername = localStorage.getItem('username'); 
     const welcomeMessageElement = document.getElementById('welcomeMessage');
     if (storedUsername) {
         document.querySelector('.login').style.display = "none";
         document.querySelector('.content').style.display = "block";
-        welcomeMessageElement.textContent = `${daynight}, ${storedUsername}`;
+       welcomeMessageElement.textContent = `${daynight ? 'Bonjour' : 'Bonsoir'}, ${storedUsername}`;
     } else {
         document.querySelector('.login').style.display = "block";
         document.querySelector('.content').style.display = "none";  
@@ -391,7 +387,7 @@ const message = compareTime();
                     document.querySelector('.login').style.display = "none";
                     document.querySelector('.content').style.display = "block"; 
                     const storedUsername2 = localStorage.getItem('username');
-                   
+                   welcomeMessageElement.textContent = `${daynight ? 'Bonjour' : 'Bonsoir'}, ${storedUsername2}`;
                     window.location.reload();
                 } else {
                     alert("Le mot de passe ne correspond à aucune de nos bases de données, contactez le service central pour un nouveau mot de passe.");    
