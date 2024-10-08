@@ -73,6 +73,7 @@
             <p id="nextLunch" class="w3-xlarge"></p>
     </div>
          <script>
+             let daynight = true;
              let isday = null;
             // Fonction pour récupérer la météo d'une localisation donnée
 function fetchWeather(latitude, longitude) {
@@ -81,7 +82,7 @@ function fetchWeather(latitude, longitude) {
         .then(response => response.json())
         .then(data => {
             // Récupération des données météo
-            let daynight = true;
+            
             const temperature = data.current_weather.temperature;
             const weatherDescription = data.current_weather.weathercode; // code météo
             const windspeed = data.current_weather.windspeed;
