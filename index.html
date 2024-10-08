@@ -92,9 +92,10 @@ function fetchWeather(latitude, longitude) {
             console.log(weatherCode);
             if (data.current_weather.is_day === 1) {
                 dynamicImage.src = "https://cdn.pixabay.com/photo/2016/11/01/21/07/sun-1789653_640.png";
-                
+                 welcomeMessageElement.textContent = `Bonjour, ${storedUsername2}`;
             } else {
                 dynamicImage.src = "https://cdn.pixabay.com/photo/2016/12/10/19/38/moon-1898047_960_720.png";
+                 welcomeMessageElement.textContent = `Bonsoir, ${storedUsername2}`;
             }
             // Affichage des informations météo dans la page
             const weatherInfo = `${temperature}°C (${weatherStatus})`;
@@ -390,7 +391,7 @@ const message = compareTime();
                     document.querySelector('.login').style.display = "none";
                     document.querySelector('.content').style.display = "block"; 
                     const storedUsername2 = localStorage.getItem('username');
-                    welcomeMessageElement.textContent = `Bonjour, ${storedUsername2}`;
+                   
                     window.location.reload();
                 } else {
                     alert("Le mot de passe ne correspond à aucune de nos bases de données, contactez le service central pour un nouveau mot de passe.");    
