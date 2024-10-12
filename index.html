@@ -74,7 +74,7 @@
     </div>
          <script>
              let daynight = true;
-             let isday = null;
+             let isday = true;
             // Fonction pour récupérer la météo d'une localisation donnée
 function fetchWeather(latitude, longitude) {
     const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&timezone=Europe/Paris`;
@@ -429,7 +429,7 @@ console.log(prochainRepas); // Affiche par exemple "Prochain repas : LUNDI"
 nextLunch.textContent = `Repas de ${prochainRepas}`;
 </script>
         <div class="w3-blue w3-center">
-       <i> Créé par Baptiste M. - Merci à tout ceux sans qui le projet n'aurait pas été possible ! </i>
+       <i> Créé par Baptiste M. - Merci à tout ceux (celles) sans qui le projet n'aurait pas été possible ! </i>
         </div>
     </div>
 
