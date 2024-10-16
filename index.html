@@ -134,7 +134,7 @@ fetchWeather(45.609779, 4.057612);
             const time = now.toLocaleTimeString('fr-FR');
             updatedTime = date;
 
-            document.getElementById('currentDateTime').textContent = `${date}, ${time}`;
+            document.getElementById('currentDateTime').textContent = `${time}`;
         } catch (error) {
             console.error('Erreur lors de la récupération de l’heure NTP :', error);
         }
