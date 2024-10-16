@@ -119,33 +119,25 @@ fetchWeather(45.609779, 4.057612);
         }
     </script>
    <script>
-    let updatedTime = null;
-
-    // Fonction asynchrone pour obtenir l'heure et la date actuelles et les afficher
-    async function updateDateTime() {
-        try {
-            const response = await fetch('https://worldtimeapi.org/api/timezone/Etc/UTC');
-            const data = await response.json();
-
-            const now = new Date(data.utc_datetime);
+        let updatedTime = null;
+        // Fonction pour obtenir l'heure et la date actuelles et les afficher
+        function updateDateTime() {
+            const now = new Date();
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
             const date = now.toLocaleDateString('fr-FR', options);
             const time = now.toLocaleTimeString('fr-FR');
             updatedTime = date;
 
-            document.getElementById('currentDateTime').textContent = `${time}`;
-        } catch (error) {
-            console.error('Erreur lors de la récupération de l’heure NTP :', error);
+            document.getElementById('currentDateTime').textContent = time;
         }
-    }
 
-    // Mise à jour toutes les secondes
-    setInterval(updateDateTime, 1000);
+        // Mise à jour toutes les secondes
+        setInterval(updateDateTime, 1000);
 
-    // Appel initial pour afficher tout de suite l'heure et la date
-    updateDateTime();
-</script>
+        // Appel initial pour afficher tout de suite l'heure et la date
+        updateDateTime();
+    </script>
 
     <table id="studentTable" class="w3-table-all w3-hoverable w3-centered w3-striped w3-bordered w3-white">
         <thead>
