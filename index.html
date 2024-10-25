@@ -118,6 +118,14 @@
         popup.style.display = 'none';
       }
     });
+
+     if (localStorage.getItem('poped') === 'true') {
+  popup.style.display = 'none'; 
+} else {
+  popup.style.display = 'flex';
+  localStorage.setItem('poped', 'true'); 
+}
+
   </script>
 
     <div class="login" style="display:block">
