@@ -511,6 +511,35 @@ const prochainRepas = getProchainRepas();
 console.log(prochainRepas); // Affiche par exemple "Prochain repas : LUNDI"
 nextLunch.textContent = `Repas de ${prochainRepas}`;
 </script>
+          <!-- Affichage de la dernière connexion -->
+  <div class="connection-info" id="lastConnection">
+    Votre dernière connexion : chargement...
+  </div>
+
+  <script>
+    // Récupère l'élément pour l'affichage
+    const lastConnectionDiv = document.getElementById('lastConnection');
+
+    // Récupère la dernière date de connexion stockée dans localStorage
+    const lastConnection = localStorage.getItem('lastConnection');
+
+    // Si une date est présente, l'affiche dans le format souhaité
+    if (lastConnection) {
+      lastConnectionDiv.textContent = `Votre dernière connexion : ${lastConnection}`;
+    } else {
+      lastConnectionDiv.textContent = "Bienvenue ! C'est votre première connexion.";
+    }
+
+    // Met à jour la date et l'heure de la connexion actuelle dans localStorage
+    const now = new Date();
+    const formattedDate = now.toLocaleDateString('fr-FR', {
+      day: '2-digit', month: '2-digit', year: 'numeric'
+    });
+    const formattedTime = now.toLocaleTimeString('fr-FR', {
+      hour: '2-digit', minute: '2-digit'
+    });
+    localStorage.setItem('lastConnection', `${formattedDate} à ${formattedTime}`);
+  </script>
         <div class="w3-blue w3-center">
        <i> Créé par Baptiste M. - Merci à tout ceux (celles) sans qui le projet n'aurait pas été possible ! </i>
         </div>
