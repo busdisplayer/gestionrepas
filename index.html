@@ -543,62 +543,6 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
         <div class="w3-blue w3-center">
        <i> Créé par Baptiste M. - Merci à tout ceux (celles) sans qui le projet n'aurait pas été possible ! </i>
         </div>
-
-         <script>
-        // Vérifier si le navigateur prend en charge les notifications
-        if ('Notification' in window && 'serviceWorker' in navigator) {
-            // Demander la permission pour les notifications
-            Notification.requestPermission().then(permission => {
-                if (permission === 'granted') {
-                    // Enregistrer le Service Worker
-                    navigator.serviceWorker.register('service-worker.js')
-                        .then(registration => {
-                            console.log('Service Worker enregistré avec succès:', registration);
-                            scheduleNotification();
-                        })
-                        .catch(error => {
-                            console.error('Échec de l\'enregistrement du Service Worker:', error);
-                        });
-                }
-            });
-        }
-
-        function scheduleNotification() {
-            // Récupérer la date actuelle
-            const now = new Date();
-            const notificationTime = new Date();
-            notificationTime.setHours(11); // Définir l'heure à 11h
-            notificationTime.setMinutes(0); // Définir les minutes à 0
-
-            // Si l'heure actuelle est déjà passée pour aujourd'hui, définir pour demain
-            if (now > notificationTime) {
-                notificationTime.setDate(notificationTime.getDate() + 1);
-            }
-
-            // Calculer le délai avant d'envoyer la notification
-            const timeout = notificationTime - now;
-
-            // Planifier l'envoi de la notification
-            setTimeout(() => {
-                sendNotification();
-                // Reprogrammer la notification pour le lendemain
-                scheduleNotification();
-            }, timeout);
-        }
-
-        function sendNotification() {
-            // Envoyer une notification locale
-            const notification = new Notification('Avez-vous mis à jour votre heure de repas ?', {
-                body: 'Il est temps de vérifier vos heures de repas.',
-                icon: 'path/to/icon.png' // Chemin vers une icône pour la notification
-            });
-
-            notification.onclick = () => {
-                // Action à réaliser lorsque la notification est cliquée
-                window.focus();
-            };
-        }
-    </script>
     </div>
 
 </body>
