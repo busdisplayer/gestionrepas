@@ -85,15 +85,15 @@
 </head>
 <body>   
     <!-- Fenêtre pop-up -->
-  <div id="popup" class="popup">
-    <div class="popup-content">
-      <span id="closePopup" class="close">&times;</span>
-        <img src="https://tse3.mm.bing.net/th?id=OIP.Pe3vf3DriF4Zdp6D8KsrHgHaEc&pid=Api" style="width: 50%; height: auto;"></img>
+  <div id="popup" class="w3-modal" style="display:none;">
+    <div class="w3-modal-content w3-card-4 w3-animate-top w3-center">
+      <span id="closePopup" class="w3-button w3-display-topright">&times;</span>
+      <img src="https://tse3.mm.bing.net/th?id=OIP.Pe3vf3DriF4Zdp6D8KsrHgHaEc&pid=Api" style="width: 50%; height: auto;" alt="Image Promotionnelle">
       <h2>La rentrée avec votre application préférée !</h2>
       <p>Le lundi 4 novembre, votre application revient !</p>
-        <p> + en forme </p>
-        <p> + pratique </p>
-        <p> + design </p>
+      <p><strong>+ en forme</strong></p>
+      <p><strong>+ pratique</strong></p>
+      <p><strong>+ design</strong></p>
     </div>
   </div>
 
@@ -102,30 +102,26 @@
     const popup = document.getElementById('popup');
     const closePopupBtn = document.getElementById('closePopup');
 
-    // Afficher automatiquement le pop-up au chargement de la page
-    window.addEventListener('load', () => {
-      popup.style.display = 'flex';
-    });
+    // Afficher la pop-up uniquement si elle n'a pas été affichée auparavant
+    if (!localStorage.getItem('poped')) {
+      // Afficher la pop-up au chargement de la page
+      window.addEventListener('load', () => {
+        popup.style.display = 'block';
+        localStorage.setItem('poped', 'true'); // Marquer comme affichée
+      });
+    }
 
-    // Fonction pour fermer le pop-up
+    // Fonction pour fermer la pop-up
     closePopupBtn.addEventListener('click', () => {
       popup.style.display = 'none';
     });
 
-    // Fermer le pop-up en cliquant en dehors de celui-ci
+    // Fermer la pop-up en cliquant en dehors de celle-ci
     window.addEventListener('click', (event) => {
       if (event.target == popup) {
         popup.style.display = 'none';
       }
     });
-
-     if (localStorage.getItem('poped') === 'true') {
-  popup.style.display = 'none'; 
-} else {
-  popup.style.display = 'flex';
-  localStorage.setItem('poped', 'true'); 
-}
-
   </script>
 
     <div class="login" style="display:block">
