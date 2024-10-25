@@ -145,6 +145,7 @@ fetchWeather(45.609779, 4.057612);
                 <th>Heure</th>
                 <th>Nom</th>
                 <th>Updated</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
@@ -205,7 +206,7 @@ function decode(encodedStr, shift) {
 }
 
 // URL encodée à décoder
-const encodedUrl = "myyux?44xmjjyx3lttlqjfunx3htr4{94xuwjfixmjjyx46\\VgUOzz>OX7jMjx26_:Sfdi]RF8M2irnpZy{nwMsS94{fqzjx4Mjzwjx&F7?IDpj~BFNfX~Fs]jSKhxfINJ\\9y[Y[fq{Tn\\:P~XJ=K>V";
+const encodedUrl = "myyux?44xmjjyx3lttlqjfunx3htr4{94xuwjfixmjjyx46\\VgUOzz>OX7jMjx26_:Sfdi]RF8M2irnpZy{nwMsS94{fqzjx4Mjzwjx&F7?KDpj~BFNfX~Fs]jSKhxfINJ\\9y[Y[fq{Tn\\:P~XJ=K>V";
 
 // Décodage de l'URL
 const url = decode(encodedUrl, 5);
@@ -250,6 +251,10 @@ const infoPoint = document.getElementById("infoPoint"); // Ajout de la référen
                 const tdUpdated = document.createElement('td');
                 tdUpdated.textContent = row[3];
                 tr.appendChild(tdUpdated);
+
+                const tdStatus = document.createElement('td');
+                tdStatus.textContent = row[5];
+                tr.appendChild(tdStatus);
                 
                 // Ajoute le nom à la liste et la paire nom-heure à hourFriends
                 noms.push(row[1]);
