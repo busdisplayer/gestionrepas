@@ -63,6 +63,11 @@
     div {
       border-radius: 9px; /* Utilise le même arrondi que w3-round */
     }
+@media (prefers-color-scheme: dark) {
+    div {
+     backgroung-color: grey; /* Utilise le même arrondi que w3-round */
+    }
+          }
           
     .popup {
       display: none; /* Masquer le pop-up par défaut */
@@ -443,22 +448,7 @@ const message = compareTime();
     }
 });
 </script>
-        <script>
-        function sendNotification(title, message) {
-    if (Notification.permission === "granted") {
-        new Notification(title, { body: message });
-    } else if (Notification.permission !== "denied") {
-        Notification.requestPermission().then(permission => {
-            if (permission === "granted") {
-                new Notification(title, { body: message });
-            }
-        });
-    }
-}
-
-// Utilisation
-sendNotification("Hello!", "Merci d'avoir activé les notifications !");
-        </script>
+        
          <script>
    
     const storedUsername = localStorage.getItem('username'); 
