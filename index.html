@@ -678,11 +678,7 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
         };
 
         this.draw = function() {
-            ctx.beginPath();
-            ctx.moveTo(this.x, this.y);
-            ctx.lineTo(this.targetX, this.targetY);
-            ctx.strokeStyle = "white";
-            ctx.stroke();
+            // Enlever les traits pour ne garder que les particules
         };
     }
 
@@ -731,6 +727,7 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
 
     animate();
 </script>
+
 
 </body>
 </html>
