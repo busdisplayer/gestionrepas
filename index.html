@@ -10,6 +10,7 @@
     <meta http-equiv="refresh" content="55">
 
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=Just+Another+Hand&family=Sevillana&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     
     <script>
   // Vérification du consentement
@@ -208,6 +209,55 @@
     if (estEnVacances()) {
         document.getElementById("vacances-banner").style.display = "block";
     }
+</script>
+<!-- Conteneur pour les feux d'artifice -->
+<div id="fireworks"></div>
+
+<!-- Script pour configurer les feux d'artifice -->
+<script>
+  particlesJS("fireworks", {
+      "particles": {
+          "number": {
+              "value": 100,
+              "density": {
+                  "enable": true,
+                  "value_area": 800
+              }
+          },
+          "color": {
+              "value": ["#ff0000", "#ffff00", "#ff00ff", "#00ff00", "#00ffff"]
+          },
+          "shape": {
+              "type": "circle"
+          },
+          "opacity": {
+              "value": 0.5,
+              "random": true
+          },
+          "size": {
+              "value": 4,
+              "random": true
+          },
+          "line_linked": {
+              "enable": false
+          },
+          "move": {
+              "enable": true,
+              "speed": 6,
+              "out_mode": "out"
+          }
+      },
+      "interactivity": {
+          "events": {
+              "onclick": {
+                  "enable": true,
+                  "mode": "push"
+              },
+              "resize": true
+          }
+      },
+      "retina_detect": true
+  });
 </script>
 
     <div class="w3-blue w3-animate-top">
