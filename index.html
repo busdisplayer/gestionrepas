@@ -618,7 +618,7 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
             imageElement.alt = data.title;
 
             // Correction de la syntaxe pour innerHTML
-            descriptionElement.innerHTML = `<h2>${data.title}</h2><p>${data.explanation}</p>`; // Utilisation des backticks
+            descriptionElement.innerHTML = `<h2>${translate(data.title)}</h2><p>${translate(data.explanation)}</p>`; // Utilisation des backticks
         } catch (error) {
             console.error('Erreur lors de la récupération de l\'image:', error);
         }
@@ -627,8 +627,29 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
     // Appeler la fonction pour récupérer et afficher l'image
     fetchAPOD();
 </script>
+        // ici commence le script de traduction automatique
+<script>
+    function translate(contenttotranslate) {
+const res = await fetch("https://libretranslate.com/translate", {
+	method: "POST",
+	body: JSON.stringify({
+		q: ${contenttotranslate},
+		source: "auto",
+		target: "fr",
+		format: "text",
+		alternatives: 1,
+		api_key: ""
+	}),
+	headers: { "Content-Type": "application/json" }
+});
 
-
+console.log(await res.json());
+        const transData = await res.json();
+        return transData.translatedText;
+    }
+    </script>
+        
+        // ici se termine le script de traduction automatique
           <!-- Affichage de la dernière connexion -->
   <div class="connection-info w3-center w3-blue" id="lastConnection">
     Votre dernière connexion : chargement...
