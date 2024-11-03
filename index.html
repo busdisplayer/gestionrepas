@@ -159,6 +159,23 @@
 </div>
 
 <style>
+    .image-container {
+            position: relative;
+            max-width: 800px;
+        }
+        .image {
+            width: 100%;
+            height: auto;
+            border: 5px solid #fff;
+        }
+        .description {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+        }
     .marquee-rtl {
         max-width: 30em;
         margin: 1em auto 2em;
@@ -582,6 +599,37 @@ const prochainRepas = getProchainRepas();
 console.log(prochainRepas); // Affiche par exemple "Prochain repas : LUNDI"
 nextLunch.textContent = `Repas de ${prochainRepas}`;
 </script>
+
+         <div class="image-container" id="image-container">
+        <img class="image" id="apod-image" alt="Image du jour de la NASA">
+        <div class="description" id="apod-description"></div>
+    </div>
+
+    <script>
+        const apiKey = 'yiOQmeTbl4EV4lTdKiMuUZOVLSEvacexdUFw1Ecm'; // Remplacez par votre clé API si nécessaire
+        const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
+
+        // Fonction pour récupérer l'image du jour
+        async function fetchAPOD() {
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                // Mettre à jour l'image et la description
+                const imageElement = document.getElementById('apod-image');
+                const descriptionElement = document.getElementById('apod-description');
+
+                imageElement.src = data.url;
+                imageElement.alt = data.title;
+                descriptionElement.innerHTML = `<h2>${data.title}</h2><p>${data.explanation}</p>`;
+            } catch (error) {
+                console.error('Erreur lors de la récupération de l\'image:', error);
+            }
+        }
+
+        // Appeler la fonction pour récupérer et afficher l'image
+        fetchAPOD();
+    </script>
           <!-- Affichage de la dernière connexion -->
   <div class="connection-info w3-center w3-blue" id="lastConnection">
     Votre dernière connexion : chargement...
