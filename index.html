@@ -633,6 +633,34 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
   <div class="connection-info w3-center w3-blue" id="lastConnection">
     Votre dernière connexion : chargement...
   </div>
+        <div class="w3-blue w3-center">
+            <div id="time-spent" style="position: fixed; bottom: 10px; right: 10px; background: #f0f0f0; padding: 10px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    Vous avez passé <span id="time-display">00:00</span> sur cette page aujourd'hui.
+</div>
+
+<script>
+// Initialiser le temps passé depuis le localStorage (ou à zéro)
+let totalTime = localStorage.getItem('timeSpent') ? parseInt(localStorage.getItem('timeSpent')) : 0;
+
+// Fonction pour afficher le temps au format mm:ss
+function displayTime() {
+    const minutes = Math.floor(totalTime / 60);
+    const seconds = totalTime % 60;
+    document.getElementById('time-display').textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+}
+
+// Mettre à jour le temps chaque seconde
+setInterval(() => {
+    totalTime++;
+    localStorage.setItem('timeSpent', totalTime);
+    displayTime();
+}, 1000);
+
+// Afficher le temps initial dès le chargement de la page
+displayTime();
+</script>
+
+        </div>
 
   <script>
     // Récupère l'élément pour l'affichage
