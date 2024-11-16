@@ -522,6 +522,9 @@ const message = compareTime();
         document.querySelector('.login').style.display = "none";
         document.querySelector('.content').style.display = "block";
        welcomeMessageElement.textContent = `${daynight ? 'Bonjour' : 'Bonsoir'}, ${storedUsername}`;
+        if (storedUsername == "Flo") {
+          welcomeMessageElement.textContent = `${daynight ? 'Bonjour' : 'Bonsoir'}, ${storedUsername} 💙`;  
+        }
     } else {
         document.querySelector('.login').style.display = "block";
         document.querySelector('.content').style.display = "none";  
