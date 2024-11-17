@@ -260,22 +260,11 @@
     // Fonction pour envoyer la requête PATCH (à compléter)
     function changeUserPassword(newpassword) {
         // Exemple d'utilisation avec fetch (à adapter selon vos besoins)
-        fetch('/api/change-password', {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer votre_token' // à adapter si nécessaire
-            },
-            body: JSON.stringify({ password: newpassword })
-        })
-        .then(response => {
-            if (response.ok) {
-                alert('Mot de passe modifié avec succès !');
-            } else {
-                alert('Erreur lors de la modification du mot de passe.');
-            }
-        })
-        .catch(error => console.error('Erreur :', error));
+        axios.patch(`https://sheetdb.io/api/v1/7ojj5lzk1krgz/name/${localStorage.getItem('username')}`, {
+        data: {
+          password: newpassword, // Mise à jour du champ "hour"
+        }
+      })
     }
 </script>
 
