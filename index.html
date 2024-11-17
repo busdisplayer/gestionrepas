@@ -226,49 +226,7 @@
     <div class="w3-blue w3-animate-top">
     <p class="w3-center w3-animate-pulse w3-xlarge" id="welcomeMessage">Bienvenue sur notre site !</p>
   </div>
-        // Ici commencer le script qui permet de modifier son mot de passe... Aucune modification en dehors de celui-ci est autorisé
-<div class="w3-blue w3-center w3-animate-right">
-    <button class="w3-center w3-blue" onclick="displayForm()">Modifier mon mot de passe</button>
-</div>
-
-<div id="changePassword" class="w3-center w3-blue" style="display:none">
-    <form id="changePForm">
-        <label for="newpassword">Votre nouveau mot de passe</label>
-        <input type="password" id="newpassword" name="password" required>
-        <br>
-        <button type="submit">Soumettre au serveur</button>
-    </form>
-</div>
-
-<script>
-    // Fonction pour afficher le formulaire
-    function displayForm() {
-        document.getElementById("changePassword").style.display = "block";
-    }
-
-    // Ajouter un écouteur d'événement au formulaire pour gérer la soumission
-    document.getElementById("changePForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Empêche le rechargement de la page
-
-        // Récupérer la valeur du mot de passe
-        const newpassword = document.getElementById("newpassword").value;
-
-        // Appeler la fonction pour modifier le mot de passe (à compléter)
-        changeUserPassword(newpassword);
-    });
-
-    // Fonction pour envoyer la requête PATCH (à compléter)
-    function changeUserPassword(newpassword) {
-        // Exemple d'utilisation avec fetch (à adapter selon vos besoins)
-        axios.patch(`https://sheetdb.io/api/v1/7ojj5lzk1krgz/name/${localStorage.getItem('username')}`, {
-        data: {
-          password: newpassword, // Mise à jour du champ "hour"
-        }
-      })
-    }
-</script>
-
-        // Fin du script de modification du mot de passe de l'utilisateur
+    
     <div class="w3-center w3-grey">
      <p id="currentDateTime" class="w3-xlarge w3-animate-left"></p> 
     </div>
