@@ -233,10 +233,10 @@
 
 <div id="changePassword" class="w3-center w3-blue" style="display:none">
     <form id="changePForm">
-        <label for="password">Code d'accès :</label>
-        <input type="password" id="password" name="password" required>
+        <label for="newpassword">Votre nouveau mot de passe</label>
+        <input type="password" id="newpassword" name="password" required>
         <br>
-        <button type="submit">Accéder au service</button>
+        <button type="submit">Soumettre au serveur</button>
     </form>
 </div>
 
@@ -251,14 +251,14 @@
         event.preventDefault(); // Empêche le rechargement de la page
 
         // Récupérer la valeur du mot de passe
-        const password = document.getElementById("password").value;
+        const newpassword = document.getElementById("newpassword").value;
 
         // Appeler la fonction pour modifier le mot de passe (à compléter)
-        changeUserPassword(password);
+        changeUserPassword(newpassword);
     });
 
     // Fonction pour envoyer la requête PATCH (à compléter)
-    function changeUserPassword(password) {
+    function changeUserPassword(newpassword) {
         // Exemple d'utilisation avec fetch (à adapter selon vos besoins)
         fetch('/api/change-password', {
             method: 'PATCH',
@@ -266,7 +266,7 @@
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer votre_token' // à adapter si nécessaire
             },
-            body: JSON.stringify({ password: password })
+            body: JSON.stringify({ password: newpassword })
         })
         .then(response => {
             if (response.ok) {
