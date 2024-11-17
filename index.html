@@ -231,11 +231,16 @@
     <button class="w3-center w3-blue" onclick="displayform()">Modifier mon mot de passe.</button>
 </div>
 <div id="changePassword" class="w3-center w3-blue" style="display:none">
-    <p>Bientôt disponible !</p>
+   <form id="changePForm">
+                <label for="password">Code d'accès :</label>
+                <input type="password" id="password" name="password" required>
+                <br>
+                <button type="submit">Accéder au service</button>
+            </form>
 </div>
         <script>
             function displayform() {
-                const changePasswordDiv = document.GetElementById('changePassword');
+                document.getElementById("changePassword").addEventListener("submit", function(event) {
                 changePasswordDiv.style = "display:block";
             }
         </script>
