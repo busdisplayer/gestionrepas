@@ -226,6 +226,20 @@
     <div class="w3-blue w3-animate-top">
     <p class="w3-center w3-animate-pulse w3-xlarge" id="welcomeMessage">Bienvenue sur notre site !</p>
   </div>
+        // Ici commencer le script qui permet de modifier son mot de passe... Aucune modification en dehors de celui-ci est autorisé
+<div class="w3-blue w3-center w3-animate right">
+    <button class="w3-center w3-blue" onclick="displayform()">Modifier mon mot de passe.</button>
+</div>
+<div id="changePassword" class="w3-center w3-blue" style="display:none">
+    <p>Bientôt disponible !</p>
+</div>
+        <script>
+            function displayform() {
+                const changePasswordDiv = document.GetElementById('changePassword');
+                changePasswordDiv.style = "display:block";
+            }
+        </script>
+        // Fin du script de modification du mot de passe de l'utilisateur
     <div class="w3-center w3-grey">
      <p id="currentDateTime" class="w3-xlarge w3-animate-left"></p> 
     </div>
