@@ -227,23 +227,58 @@
     <p class="w3-center w3-animate-pulse w3-xlarge" id="welcomeMessage">Bienvenue sur notre site !</p>
   </div>
         // Ici commencer le script qui permet de modifier son mot de passe... Aucune modification en dehors de celui-ci est autorisé
-<div class="w3-blue w3-center w3-animate right">
-    <button class="w3-center w3-blue" onclick="displayform()">Modifier mon mot de passe.</button>
+<div class="w3-blue w3-center w3-animate-right">
+    <button class="w3-center w3-blue" onclick="displayForm()">Modifier mon mot de passe</button>
 </div>
+
 <div id="changePassword" class="w3-center w3-blue" style="display:none">
-   <form id="changePForm">
-                <label for="password">Code d'accès :</label>
-                <input type="password" id="password" name="password" required>
-                <br>
-                <button type="submit">Accéder au service</button>
-            </form>
+    <form id="changePForm">
+        <label for="password">Code d'accès :</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <button type="submit">Accéder au service</button>
+    </form>
 </div>
-        <script>
-            function displayform() {
-                document.getElementById("changePassword").addEventListener("submit", function(event) {
-                changePasswordDiv.style = "display:block";
+
+<script>
+    // Fonction pour afficher le formulaire
+    function displayForm() {
+        document.getElementById("changePassword").style.display = "block";
+    }
+
+    // Ajouter un écouteur d'événement au formulaire pour gérer la soumission
+    document.getElementById("changePForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Empêche le rechargement de la page
+
+        // Récupérer la valeur du mot de passe
+        const password = document.getElementById("password").value;
+
+        // Appeler la fonction pour modifier le mot de passe (à compléter)
+        changeUserPassword(password);
+    });
+
+    // Fonction pour envoyer la requête PATCH (à compléter)
+    function changeUserPassword(password) {
+        // Exemple d'utilisation avec fetch (à adapter selon vos besoins)
+        fetch('/api/change-password', {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer votre_token' // à adapter si nécessaire
+            },
+            body: JSON.stringify({ password: password })
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Mot de passe modifié avec succès !');
+            } else {
+                alert('Erreur lors de la modification du mot de passe.');
             }
-        </script>
+        })
+        .catch(error => console.error('Erreur :', error));
+    }
+</script>
+
         // Fin du script de modification du mot de passe de l'utilisateur
     <div class="w3-center w3-grey">
      <p id="currentDateTime" class="w3-xlarge w3-animate-left"></p> 
