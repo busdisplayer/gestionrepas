@@ -778,13 +778,14 @@ if (estEnVacances()) {
         animate();
     }
 </script>
-    <div id="snow-container" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;">
+   
+<div id="snow-container" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;">
   <script>
     (function() {
-      // Vérifie si on est entre le 25 novembre et le 5 janvier
+      // Vérifie si on est entre le 25 novembre et le 25 décembre
       const now = new Date();
       const start = new Date(now.getFullYear(), 10, 25); // 25 novembre
-      const end = new Date(now.getFullYear() + (now.getMonth() === 11 ? 1 : 0), 0, 5); // 5 janvier
+      const end = new Date(now.getFullYear(), 11, 25); // 25 décembre
       if (now < start || now > end) return;
 
       // Rendre le conteneur visible
