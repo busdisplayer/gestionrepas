@@ -103,11 +103,11 @@
     <div class="w3-modal-content w3-card-4 w3-animate-top w3-center">
       <span id="closePopup" class="w3-button w3-display-topright">&times;</span>
       <img src="https://tse3.mm.bing.net/th?id=OIP.Pe3vf3DriF4Zdp6D8KsrHgHaEc&pid=Api" style="width: 50%; height: auto;" alt="Image Promotionnelle">
-      <h2>La rentrée avec votre application préférée !</h2>
-      <p>Le lundi 4 novembre, votre application revient !</p>
-      <p><strong>+ en forme</strong></p>
-      <p><strong>+ pratique</strong></p>
-      <p><strong>+ design</strong></p>
+      <h2>L'hiver arrive avec votre application préférée !</h2>
+      <p>Cet hiver, soyez connecté(e) !</p>
+      <p><strong>+ Nouvelle charte du site (en bas)</strong></p>
+      <p><strong>+ Le design special Noël</strong></p>
+      <p><strong>+ Sécurisé</strong></p>
     </div>
   </div>
 
@@ -117,11 +117,11 @@
     const closePopupBtn = document.getElementById('closePopup');
 
     // Afficher la pop-up uniquement si elle n'a pas été affichée auparavant
-    if (!localStorage.getItem('poped')) {
+    if (!localStorage.getItem('poped2')) {
       // Afficher la pop-up au chargement de la page
       window.addEventListener('load', () => {
         popup.style.display = 'block';
-        localStorage.setItem('poped', 'true'); // Marquer comme affichée
+        localStorage.setItem('poped2', 'true'); // Marquer comme affichée
       });
     }
 
@@ -826,7 +826,7 @@ if (estEnVacances()) {
 <div class="w3-container w3-center">
   <!-- Bouton ou texte cliquable -->
   <div id="toggle-mentions" class="w3-button w3-blue w3-round w3-hover-light-blue" style="cursor: pointer;">
-    Afficher les mentions légales
+    Afficher la charte du site
   </div>
 
   <!-- Conteneur des mentions légales caché par défaut -->
@@ -840,12 +840,12 @@ if (estEnVacances()) {
         > Les durées de session<br>
         > Le type d'appareil<br>
         > Les données globales de vos systèmes (OS, navigateur...)<br>
-        Celle-ci sont collectées par Google Analyctics dans le but d'effectuer des statistiques<br>
+        Celles-ci sont collectées par Google Analyctics dans le but d'effectuer des statistiques<br>
         Les données collectées en votre nom sont :<br>
         > Votre heure de repas<br>
         > Votre date de dernière mise à jour<br>
     Sur votre appareil, nous stockons :<br>
-        > Votre nom d'utilisateur (les identifiants de connexions ne sont pas stockés, sauf via service alternatif, pour l'instant.<br>
+        > Votre nom d'utilisateur (les identifiants de connexions ne sont pas stockés, sauf via service alternatif, pour l'instant).<br>
         > Votre dernière heure de connexion (pour personnaliser les services)<br>
         Nous nous engageons à ne pas collecter :<br>
         > Vos données de géolocalisation<br>
