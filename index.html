@@ -823,7 +823,45 @@ if (estEnVacances()) {
   </script>
 </div>
 
+<div class="w3-container">
+  <!-- Bouton ou texte cliquable -->
+  <div id="toggle-mentions" class="w3-button w3-blue w3-round w3-hover-light-blue" style="cursor: pointer;">
+    Afficher les mentions légales
+  </div>
 
+  <!-- Conteneur des mentions légales caché par défaut -->
+  <div id="mentions-legales" class="w3-hide w3-animate-opacity w3-padding w3-light-grey w3-border w3-round" style="margin-top: 10px;">
+    <h3>Charte du site</h3>
+    <p>
+     Ce site est hébergé par GitHub Page, un fournisseur de serveur gratuit.<br>
+        Ce projet à but non-lucratif est mis à votre disposition par l'entreprise BusDisplayer (développement open-source). <br>
+        Les données collectées anonymement sont :
+        > Les heures de connexion
+        > Les durées de session
+        > Le type d'appareil
+        > Les données globales de vos systèmes (OS, navigateur...)
+        Celle-ci sont collectées par Google Analyctics dans le but d'effectuer des statistiques
+        Les données collectées en votre nom sont :
+        > Votre heure de repas
+        > Votre date de dernière mise à jour
+    
+    </p>
+  </div>
+</div>
+
+<script>
+  // Gestion du clic pour afficher/masquer les mentions légales
+  document.getElementById('toggle-mentions').onclick = function () {
+    const mentions = document.getElementById('mentions-legales');
+    if (mentions.classList.contains('w3-hide')) {
+      mentions.classList.remove('w3-hide'); // Afficher
+      this.textContent = 'Masquer la charte du site';
+    } else {
+      mentions.classList.add('w3-hide'); // Cacher
+      this.textContent = 'Afficher la charte du site';
+    }
+  };
+</script>
 
 </body>
 </html>
