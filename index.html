@@ -632,6 +632,138 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
     // Appeler la fonction pour récupérer et afficher l'image
     fetchAPOD();
 </script>
+       // début soirée internat
+    <style>
+        .event-card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            background-color: #f0f8ff; /* Bleu pâle */
+            color: #02457a; /* Bleu foncé */
+            max-width: 300px;
+            margin: 10px auto;
+            text-align: center;
+        }
+
+        .event-header {
+            background-color: #02457a;
+            color: white;
+            padding: 10px;
+            font-size: 1.2em;
+        }
+
+        .event-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .event-details {
+            padding: 10px;
+        }
+
+        .timer {
+            font-size: 1em;
+            color: #ff4500; /* Rouge orangé */
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .w3-button {
+            background-color: #02457a;
+            color: white;
+            text-decoration: none;
+            margin: 5px;
+        }
+
+        .w3-button:hover {
+            background-color: #0366d6;
+        }
+    </style>
+
+
+<div class="w3-content">
+    <!-- Diaporama -->
+    <div class="event-card w3-animate-opacity mySlides">
+        <div class="event-header">Soirée Karaoké</div>
+        <img src="https://via.placeholder.com/300x150?text=Soirée+Karaoké" alt="Soirée Karaoké" class="event-image">
+        <div class="event-details">
+            <p><b>Date :</b> 5 décembre 2024</p>
+            <p><b>Heure :</b> 20:00 - 23:00</p>
+            <p><b>Salle :</b> Salle Polyvalente</p>
+            <p class="timer" id="timer1">Temps restant: --:--:--</p>
+        </div>
+    </div>
+
+    <div class="event-card w3-animate-opacity mySlides" style="display:none">
+        <div class="event-header">Dîner Convivial</div>
+        <img src="https://via.placeholder.com/300x150?text=Dîner+Convivial" alt="Dîner Convivial" class="event-image">
+        <div class="event-details">
+            <p><b>Date :</b> 12 décembre 2024</p>
+            <p><b>Heure :</b> 19:00 - 22:30</p>
+            <p><b>Salle :</b> Restaurant Le Gourmet</p>
+            <p class="timer" id="timer2">Temps restant: --:--:--</p>
+        </div>
+    </div>
+
+    <!-- Boutons de navigation -->
+    <div style="text-align:center">
+        <button class="w3-button" onclick="plusSlides(-1)">&#10094; Précédent</button>
+        <button class="w3-button" onclick="plusSlides(1)">Suivant &#10095;</button>
+    </div>
+</div>
+
+<script>
+    // Script pour gérer le diaporama
+    let slideIndex = 0;
+    const slides = document.getElementsByClassName("mySlides");
+
+    function showSlides(n) {
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slides[n].style.display = "block";
+    }
+
+    function plusSlides(n) {
+        slideIndex = (slideIndex + n + slides.length) % slides.length;
+        showSlides(slideIndex);
+    }
+
+    showSlides(slideIndex);
+
+    // Fonction pour gérer le compte à rebours
+    function startCountdown(dateString, timerId) {
+        const targetDate = new Date(dateString).getTime();
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                document.getElementById(timerId).innerHTML = "L'événement a commencé !";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById(timerId).innerHTML = `Temps restant: ${days}j ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        updateTimer(); // Premier affichage immédiat
+        setInterval(updateTimer, 1000);
+    }
+
+    // Initialisation des timers pour chaque événement
+    startCountdown("2024-12-05T20:00:00", "timer1");
+    startCountdown("2024-12-12T19:00:00", "timer2");
+</script>
+
+// Fin soirée internat
+
      
           <!-- Affichage de la dernière connexion -->
   <div class="connection-info w3-center w3-blue" id="lastConnection">
