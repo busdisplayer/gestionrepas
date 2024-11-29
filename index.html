@@ -632,8 +632,8 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
     // Appeler la fonction pour récupérer et afficher l'image
     fetchAPOD();
 </script>
-       // début soirée internat
-    <style>
+   
+<style>
         .event-card {
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -674,86 +674,128 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
             color: white;
             text-decoration: none;
             margin: 5px;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
         }
 
         .w3-button:hover {
             background-color: #0366d6;
         }
     </style>
+</head>
+<body>
+    <div class="w3-content">
+        <!-- Conteneur pour les événements générés dynamiquement -->
+        <div id="event-container"></div>
 
-
-<div class="w3-content">
-    <!-- Diaporama -->
-    <div class="event-card w3-animate-opacity mySlides">
-        <div class="event-header">Soirée Thanksgiving</div>
-        <img src="https://tse4.mm.bing.net/th?id=OIP.jZx-nFWgChqbVdyZn2l4dAHaDs&pid=Api" alt="Soirée Karaoké" class="event-image">
-        <div class="event-details">
-            <p><b>Description :</b>Venons partager un moment ensemble !</p>
-            <p><b>Date :</b> 28 novembre 2024</p>
-            <p><b>Heure :</b> 20:45 - 21:45</p>
-            <p><b>Salle :</b> Salle TV - 106 </p>
-            <p class="timer" id="timer1">Temps restant: --:--:--</p>
+        <!-- Boutons de navigation -->
+        <div style="text-align:center">
+            <button class="w3-button" onclick="plusSlides(-1)">&#10094; Précédent</button>
+            <button class="w3-button" onclick="plusSlides(1)">Suivant &#10095;</button>
         </div>
     </div>
 
-    <!-- Boutons de navigation -->
-    <div style="text-align:center">
-        <button class="w3-button" onclick="plusSlides(-1)">&#10094; Précédent</button>
-        <button class="w3-button" onclick="plusSlides(1)">Suivant &#10095;</button>
-    </div>
-</div>
+    <script>
+        const sheetURL = "https://sheets.googleapis.com/v4/spreadsheets/1gXMyuP_iYZXguoSNRkgRrBCd3YrrYGBh4OiBswdYyMQ/values/A1:G?key=AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q";
 
-<script>
-    // Script pour gérer le diaporama
-    let slideIndex = 0;
-    const slides = document.getElementsByClassName("mySlides");
+        let slideIndex = 0;
 
-    function showSlides(n) {
-        for (let i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
+        // Fonction pour générer une carte d'événement
+        function createEventCard(event, index) {
+            const timerId = `timer${index}`;
+            return `
+                <div class="event-card w3-animate-opacity mySlides" style="display: none;">
+                    <div class="event-header">${event[0]}</div>
+                    <img src="${event[1]}" alt="${event[0]}" class="event-image">
+                    <div class="event-details">
+                        <p><b>Description :</b> ${event[2]}</p>
+                        <p><b>Date :</b> ${event[3]}</p>
+                        <p><b>Heure :</b> ${event[4]}</p>
+                        <p><b>Bâtiment :</b> ${event[5]}</p>
+                        <p><b>Salle :</b> ${event[6]}</p>
+                        <p class="timer" id="${timerId}">Temps restant: --:--:--</p>
+                    </div>
+                </div>`;
         }
-        slides[n].style.display = "block";
-    }
 
-    function plusSlides(n) {
-        slideIndex = (slideIndex + n + slides.length) % slides.length;
-        showSlides(slideIndex);
-    }
+        // Fonction pour démarrer un compte à rebours pour chaque événement
+        function startCountdown(dateString, timerId) {
+            const targetDate = new Date(dateString).getTime();
 
-    showSlides(slideIndex);
+            function updateTimer() {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
 
-    // Fonction pour gérer le compte à rebours
-    function startCountdown(dateString, timerId) {
-        const targetDate = new Date(dateString).getTime();
+                if (distance < 0) {
+                    document.getElementById(timerId).innerHTML = "L'événement a commencé !";
+                    return;
+                }
 
-        function updateTimer() {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            if (distance < 0) {
-                document.getElementById(timerId).innerHTML = "L'événement a commencé !";
-                return;
+                document.getElementById(timerId).innerHTML = `Temps restant: ${days}j ${hours}h ${minutes}m ${seconds}s`;
             }
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById(timerId).innerHTML = `Temps restant: ${days}j ${hours}h ${minutes}m ${seconds}s`;
+            updateTimer();
+            setInterval(updateTimer, 1000);
         }
 
-        updateTimer(); // Premier affichage immédiat
-        setInterval(updateTimer, 1000);
-    }
+        // Fonction pour afficher les diapositives
+        function showSlides(n) {
+            const slides = document.getElementsByClassName("mySlides");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[n].style.display = "block";
+        }
 
-    // Initialisation des timers pour chaque événement
-    startCountdown("2024-11-28T20:45:00", "timer1");
-</script>
+        function plusSlides(n) {
+            const slides = document.getElementsByClassName("mySlides");
+            slideIndex = (slideIndex + n + slides.length) % slides.length;
+            showSlides(slideIndex);
+        }
 
-// Fin soirée internat
+        // Charger les données depuis la feuille Google Sheet
+        async function loadEvents() {
+            try {
+                const response = await fetch(sheetURL);
+                const data = await response.json();
 
-     
+                if (!data.values || data.values.length <= 1) {
+                    console.error("Aucun événement trouvé !");
+                    return;
+                }
+
+                // Extraire les événements (sauter l'en-tête)
+                const events = data.values.slice(1);
+
+                // Conteneur pour les événements
+                const eventContainer = document.getElementById("event-container");
+
+                // Générer les cartes événementielles
+                events.forEach((event, index) => {
+                    eventContainer.innerHTML += createEventCard(event, index);
+
+                    // Initialiser le compte à rebours
+                    const eventDate = `${event[3].split(" ")[0]}T${event[4]}:00`;
+                    startCountdown(eventDate, `timer${index}`);
+                });
+
+                // Afficher la première diapositive
+                showSlides(slideIndex);
+            } catch (error) {
+                console.error("Erreur lors du chargement des événements :", error);
+            }
+        }
+
+        // Charger les événements à l'initialisation
+        loadEvents();
+    </script>
+        
           <!-- Affichage de la dernière connexion -->
   <div class="connection-info w3-center w3-blue" id="lastConnection">
     Votre dernière connexion : chargement...
