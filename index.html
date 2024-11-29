@@ -634,55 +634,95 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
 </script>
    
 <style>
-        .event-card {
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            background-color: #f0f8ff; /* Bleu pâle */
-            color: #02457a; /* Bleu foncé */
-            max-width: 300px;
-            margin: 10px auto;
-            text-align: center;
-        }
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5; /* Fond gris clair */
+    }
 
-        .event-header {
-            background-color: #02457a;
-            color: white;
-            padding: 10px;
-            font-size: 1.2em;
-        }
+    .event-card {
+        border-radius: 15px; /* Coins modérés */
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombre plus sérieuse */
+        overflow: hidden;
+        background-color: #ffffff; /* Blanc élégant */
+        color: #333333; /* Texte plus neutre */
+        width: 90%; /* Toute la largeur, avec marges */
+        max-width: 900px; /* Limite pour grands écrans */
+        margin: 20px auto;
+        text-align: left; /* Alignement sérieux */
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation douce */
+    }
 
-        .event-image {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-        }
+    .event-card:hover {
+        transform: translateY(-10px); /* Léger effet de flottement */
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Ombre plus marquée au survol */
+    }
 
-        .event-details {
-            padding: 10px;
-        }
+    .event-header {
+        background: linear-gradient(90deg, #02457a, #0366d6); /* Dégradé élégant */
+        color: white;
+        padding: 15px;
+        font-size: 1.5em;
+        font-weight: bold;
+        position: relative;
+        text-align: center;
+        animation: gradient-move 3s infinite; /* Animation */
+    }
 
-        .timer {
-            font-size: 1em;
-            color: #ff4500; /* Rouge orangé */
-            font-weight: bold;
-            margin-top: 5px;
-        }
+    /* Animation du dégradé */
+    @keyframes gradient-move {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
 
-        .w3-button {
-            background-color: #02457a;
-            color: white;
-            text-decoration: none;
-            margin: 5px;
-            padding: 5px 10px;
-            border: none;
-            cursor: pointer;
-        }
+    .event-header {
+        background-size: 200% 200%;
+    }
 
-        .w3-button:hover {
-            background-color: #0366d6;
-        }
-    </style>
+    .event-image {
+        width: 100%;
+        height: 300px; /* Taille plus adaptée à une carte pleine largeur */
+        object-fit: cover;
+    }
+
+    .event-details {
+        padding: 20px;
+        line-height: 1.6;
+    }
+
+    .event-details p {
+        margin: 10px 0;
+    }
+
+    .timer {
+        font-size: 1.2em;
+        color: #ff4500; /* Rouge orangé pour attirer l’attention */
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .w3-button {
+        display: inline-block;
+        background-color: #0366d6;
+        color: white;
+        text-decoration: none;
+        margin: 10px;
+        padding: 10px 20px;
+        border-radius: 25px; /* Boutons arrondis */
+        border: none;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Animation bouton */
+    }
+
+    .w3-button:hover {
+        background-color: #02457a;
+        transform: scale(1.05); /* Agrandissement au survol */
+    }
+</style>
+
 
     <div class="w3-content">
         <!-- Conteneur pour les événements générés dynamiquement -->
