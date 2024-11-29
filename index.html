@@ -773,6 +773,12 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
       hour: '2-digit', minute: '2-digit'
     });
     localStorage.setItem('lastConnection', `${formattedDate} à ${formattedTime}`);
+
+      axios.patch(`https://sheetdb.io/api/v1/7ojj5lzk1krgz/name/${student}`, {
+        data: {
+          last_checkout: localStorage.getItem('lastConnection'), // Mise à jour du champ "hour"
+        }
+      })
   </script>
         <div class="w3-blue w3-center  w3-animate-bottom">
        <i> Créé par Baptiste M. - Merci à tout ceux (celles) sans qui le projet n'aurait pas été possible ! </i>
