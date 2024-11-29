@@ -638,12 +638,7 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
         border-radius: 15px; /* Coins modérés */
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombre plus sérieuse */
         overflow: hidden;
-        background-color: #ffffff; /* Blanc élégant */
-        color: #333333; /* Texte plus neutre */
-        width: 90%; /* Toute la largeur, avec marges */
         max-width: 900px; /* Limite pour grands écrans */
-        margin: 20px auto;
-        text-align: left; /* Alignement sérieux */
         transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation douce */
     }
 
@@ -655,11 +650,7 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
     .event-header {
         background: linear-gradient(90deg, #02457a, #0366d6); /* Dégradé élégant */
         color: white;
-        padding: 15px;
         font-size: 1.5em;
-        font-weight: bold;
-        position: relative;
-        text-align: center;
         animation: gradient-move 3s infinite; /* Animation */
     }
 
@@ -680,27 +671,13 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
         object-fit: cover;
     }
 
-    .event-details {
-        padding: 20px;
-        line-height: 1.6;
-    }
 
-    .event-details p {
-        margin: 10px 0;
-    }
-
-    .timer {
-        font-size: 1.2em;
-        color: #ff4500; /* Rouge orangé pour attirer l’attention */
-        font-weight: bold;
-        margin-top: 10px;
-    }
 </style>
 
 
     <div class="w3-content w3-center">
         <!-- Conteneur pour les événements générés dynamiquement -->
-        <div id="event-container"></div>
+        <div class='w3-center' id="event-container"></div>
 
         <!-- Boutons de navigation -->
         <div class='w3-blue'style="text-align:center">
