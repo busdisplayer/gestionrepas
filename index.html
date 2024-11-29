@@ -746,25 +746,30 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
         loadEvents();
     </script>
         
-          <!-- Affichage de la dernière connexion -->
-  <div class="connection-info w3-center w3-blue" id="lastConnection">
-    Votre dernière connexion : chargement...
-  </div>
-  <script>
-    // Récupère l'élément pour l'affichage
-    const lastConnectionDiv = document.getElementById('lastConnection');
+         <!-- Affichage de la dernière connexion -->
+<div class="connection-info w3-center w3-blue" id="lastConnection">
+  Votre dernière connexion : chargement...
+</div>
 
-    // Récupère la dernière date de connexion stockée dans localStorage
-    const lastConnection = localStorage.getItem('lastConnection');
+<script>
+  // Récupère l'élément pour l'affichage
+  const lastConnectionDiv = document.getElementById('lastConnection');
 
-    // Si une date est présente, l'affiche dans le format souhaité
-    if (lastConnection) {
-      lastConnectionDiv.textContent = `Votre dernière connexion : ${lastConnection}`;
-    } else {
-      lastConnectionDiv.textContent = "Bienvenue ! C'est votre première connexion.";
-    }
+  // Récupère la dernière date de connexion stockée dans localStorage
+  const lastConnection = localStorage.getItem('lastConnection');
 
-    // Met à jour la date et l'heure de la connexion actuelle dans localStorage
+  // Si une date est présente, l'affiche dans le format souhaité
+  if (lastConnection) {
+    lastConnectionDiv.textContent = `Votre dernière connexion : ${lastConnection}`;
+  } else {
+    lastConnectionDiv.textContent = "Bienvenue ! C'est votre première connexion.";
+  }
+
+  // Vérifier si la session a déjà été commencée
+  const sessionStarted = sessionStorage.getItem('sessionStarted');
+
+  // Si la session n'a pas encore commencé, mettre à jour la date et l'heure dans localStorage
+  if (!sessionStarted) {
     const now = new Date();
     const formattedDate = now.toLocaleDateString('fr-FR', {
       day: '2-digit', month: '2-digit', year: 'numeric'
@@ -772,14 +777,23 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
     const formattedTime = now.toLocaleTimeString('fr-FR', {
       hour: '2-digit', minute: '2-digit'
     });
+
+    // Met à jour la date et l'heure de la connexion dans localStorage
     localStorage.setItem('lastConnection', `${formattedDate} à ${formattedTime}`);
-let student = localStorage.getItem('username');
-      axios.patch(`https://sheetdb.io/api/v1/7ojj5lzk1krgz/name/${student}`, {
-        data: {
-          last_checkout: localStorage.getItem('lastConnection'), // Mise à jour du champ "hour"
-        }
-      })
-  </script>
+
+    // Marquer que la session a commencé (cela ne se reproduira pas pendant la même session)
+    sessionStorage.setItem('sessionStarted', 'true');
+
+    // Mise à jour du champ "last_checkout" sur le serveur
+    let student = localStorage.getItem('username');
+    axios.patch(`https://sheetdb.io/api/v1/7ojj5lzk1krgz/name/${student}`, {
+      data: {
+        last_checkout: `${formattedDate} à ${formattedTime}`, // Mise à jour du champ "last_checkout"
+      }
+    });
+  }
+</script>
+
         <div class="w3-blue w3-center  w3-animate-bottom">
        <i> Créé par Baptiste M. - Merci à tout ceux (celles) sans qui le projet n'aurait pas été possible ! </i>
         </div>
