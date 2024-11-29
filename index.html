@@ -788,7 +788,7 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
     let student = localStorage.getItem('username');
     axios.patch(`https://sheetdb.io/api/v1/7ojj5lzk1krgz/name/${student}`, {
       data: {
-        last_checkout: `${formattedDate} à ${formattedTime}`, // Mise à jour du champ "last_checkout"
+        last_checkout: `${formattedDate}T${formattedTime}`, // Mise à jour du champ "last_checkout"
       }
     });
   }
