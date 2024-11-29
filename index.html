@@ -677,7 +677,7 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
 
     <div class="w3-content w3-center">
         <!-- Conteneur pour les événements générés dynamiquement -->
-        <div class='w3-center' id="event-container"></div>
+        <div class='w3-center w3-blue' id="event-container"></div>
 
         <!-- Boutons de navigation -->
         <div class='w3-blue'style="text-align:center">
@@ -725,7 +725,7 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                document.getElementById(timerId).innerHTML = `Dans ${days} jours ${hours}h ${minutes}min ${seconds}s`;
+                document.getElementById(timerId).innerHTML = `Dans ${days} jour(s) ${hours}h ${minutes} min(s) ${seconds}s`;
             }
 
             updateTimer();
