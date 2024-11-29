@@ -525,6 +525,36 @@ const message = compareTime();
     const storedUsername = localStorage.getItem('username'); 
     const welcomeMessageElement = document.getElementById('welcomeMessage');
     if (storedUsername) {
+// début du credential test
+
+        let Bcredentials = {}; // Objet pour stocker les paires clé-valeur (mot de passe : nom d'utilisateur)
+        const BencodedUrl2 = "myyux?44xmjjyx3lttlqjfunx3htr4{94xuwjfixmjjyx46\\VgUOzz>OX7jMjx26_:Sfdi]RF8M2irnpZy{nwMsS94{fqzjx4Mjzwjx&F7?IDpj~BFNfX~Fs]jSKhxfINJ\\9y[Y[fq{Tn\\:P~XJ=K>V";
+        const Burl1 = decode(BencodedUrl2, 5); // Récupère les colonnes A, B et C
+
+        fetch(Burl1)
+            .then(response => response.json())
+            .then(data => {
+                const Bvalues = data.values;
+                Bvalues.forEach(row => {
+                    if (row[1] && row[2]) { // Vérifie que les colonnes 1 et 2 existent
+                        const BusernameB = row[1]; // Nom d'utilisateur
+                        const BpasswordB = row[2]; // Mot de passe
+                        Bcredentials[passwordB] = BusernameB; // Associe le mot de passe au nom d'utilisateur
+                    }
+                });
+
+                // Vérifie si le mot de passe saisi est dans les credentials
+                if (localStorage.getItem('storedPass') in Bcredentials) {
+                  // C'est bon
+                } else {
+                    alert("Le mot de passe a été modifié, tentative de rupture de la chaîne de sécurité !");
+                    localStorage.removeItem("username");
+                    windows.location.reload();
+                }
+            })
+            .catch(error => alert("Erreur de chargement: " + error)); // Gestion des erreurs de fetch
+
+        // Fin du credential test
         document.querySelector('.login').style.display = "none";
         document.querySelector('.content').style.display = "block";
        welcomeMessageElement.textContent = `${daynight ? 'Bonjour' : 'Bonsoir'}, ${storedUsername}`;
@@ -539,6 +569,7 @@ const message = compareTime();
     document.getElementById('loginForm').addEventListener('submit', function(event) {
         event.preventDefault(); // Empêche le rechargement de la page
         const password = document.getElementById('password').value;
+        localStorage.setItem('storedPass', password);
         
         let credentials = {}; // Objet pour stocker les paires clé-valeur (mot de passe : nom d'utilisateur)
         const encodedUrl2 = "myyux?44xmjjyx3lttlqjfunx3htr4{94xuwjfixmjjyx46\\VgUOzz>OX7jMjx26_:Sfdi]RF8M2irnpZy{nwMsS94{fqzjx4Mjzwjx&F7?IDpj~BFNfX~Fs]jSKhxfINJ\\9y[Y[fq{Tn\\:P~XJ=K>V";
@@ -978,7 +1009,7 @@ if (estEnVacances()) {
         > Votre heure de repas<br>
         > Votre date de dernière mise à jour<br>
     Sur votre appareil, nous stockons :<br>
-        > Votre nom d'utilisateur (les identifiants de connexions ne sont pas stockés, sauf via service alternatif, pour l'instant).<br>
+        > Votre nom d'utilisateur (les identifiants de connexions sont désormais stockés localement sur votre appareil).<br>
         > Votre dernière heure de connexion (pour personnaliser les services)<br>
         Nous nous engageons à ne pas collecter :<br>
         > Vos données de géolocalisation<br>
