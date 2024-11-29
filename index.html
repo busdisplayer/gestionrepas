@@ -748,7 +748,7 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                document.getElementById(timerId).innerHTML = `Temps restant: ${days}j ${hours}h ${minutes}m ${seconds}s`;
+                document.getElementById(timerId).innerHTML = `Dans ${days} jours ${hours}h ${minutes}min ${seconds}s`;
             }
 
             updateTimer();
