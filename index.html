@@ -639,7 +639,7 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
 </script>
     <div class="w3-content w3-center">
         <!-- Conteneur pour les événements générés dynamiquement -->
-        <div class='w3-center w3-dark-blue w3-xlarge' id="event-container"></div>
+        <div class='w3-center w3-dark-blue' id="event-container"></div>
 
         <!-- Boutons de navigation -->
         <div class='w3-dark-blue'style="text-align:center">
@@ -658,7 +658,7 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
             const timerId = `timer${index}`;
             return `
                 <div class="event-card w3-animate-opacity mySlides" style="display: none;">
-                    <div class="event-header">${event[0]}</div>
+                    <div class="event-header w3-xlarge">${event[0]}</div>
                     <img src="${event[1]}" alt="${event[0]}" class="event-image">
                     <div class="event-details">
                         <p>${event[2]}</p>
