@@ -637,49 +637,6 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
     // Appeler la fonction pour récupérer et afficher l'image
     fetchAPOD();
 </script>
-   
-<style>
-    .event-card {
-        border-radius: 15px; /* Coins modérés */
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombre plus sérieuse */
-        overflow: hidden;
-        max-width: 900px; /* Limite pour grands écrans */
-        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation douce */
-    }
-
-    .event-card:hover {
-        transform: translateY(-10px); /* Léger effet de flottement */
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Ombre plus marquée au survol */
-    }
-
-    .event-header {
-        background: linear-gradient(90deg, #02457a, #0366d6); /* Dégradé élégant */
-        color: white;
-        font-size: 1.5em;
-        animation: gradient-move 3s infinite; /* Animation */
-    }
-
-    /* Animation du dégradé */
-    @keyframes gradient-move {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-
-    .event-header {
-        background-size: 200% 200%;
-    }
-
-    .event-image {
-        width: 100%;
-        height: 300px; /* Taille plus adaptée à une carte pleine largeur */
-        object-fit: cover;
-    }
-
-
-</style>
-
-
     <div class="w3-content w3-center">
         <!-- Conteneur pour les événements générés dynamiquement -->
         <div class='w3-center w3-dark-blue' id="event-container"></div>
