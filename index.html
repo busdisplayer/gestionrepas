@@ -766,13 +766,17 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
 
                 // Générer les cartes événementielles
                 events.forEach((event, index) => {
-                   if (event[10] && event[10].includes('username')) {
-                    eventContainer.innerHTML += createEventCard(event, index);
+                  if (event[10] && event[10].includes(localStorage.getItem('username'))) {
+    // Créer une carte d'événement et l'ajouter au conteneur
+    eventContainer.innerHTML += createEventCard(event, index);
 
-                    // Initialiser le compte à rebours
-                    const eventDate = `${event[3].split(" ")[0]}T${event[4]}:00`;
-                    startCountdown(eventDate, `timer${index}`);
-                    }
+    // Initialiser le compte à rebours
+    const eventDate = `${event[3].split(" ")[0]}T${event[4]}:00`;
+
+    // Lancer le compte à rebours
+    startCountdown(eventDate, `timer${index}`);
+}
+
                 });
 
                 // Afficher la première diapositive
