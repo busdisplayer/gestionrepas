@@ -676,11 +676,14 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
 
     // Récupérer le texte à traduire
     const toTranslate = descriptionElement.innerText;
+        console.log(totranslate);
 
     // Effectuer la requête pour traduire le texte
     fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(toTranslate)}&langpair=en|fr`)
+        console.log('https://api.mymemory.translated.net/get?q=${encodeURIComponent(toTranslate)}&langpair=en|fr');
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             // Vérifier si une traduction a été reçue
             if (data.responseData && data.responseData.translatedText) {
                 // Mettre à jour l'élément avec la traduction
