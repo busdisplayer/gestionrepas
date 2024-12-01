@@ -680,7 +680,6 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
 
     // Effectuer la requête pour traduire le texte
     fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(toTranslate)}&langpair=en|fr`)
-        console.log('https://api.mymemory.translated.net/get?q=${encodeURIComponent(toTranslate)}&langpair=en|fr');
         .then(response => response.json())
         .then(data => {
             console.log(data);
