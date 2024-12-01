@@ -508,6 +508,12 @@ const message = compareTime();
         }
       })
       .then(response => {
+          if ("vibrate" in navigator) {
+    // Vibre pendant 1000 millisecondes (1 seconde)
+    navigator.vibrate(1000);
+} else {
+    console.log("Le vibreur n'est pas supporté sur ce navigateur.");
+}
         window.location.reload();
       })
       .catch(error => {
