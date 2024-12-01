@@ -689,7 +689,7 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
             const timerId = `timer${index}`;
             return `
                 <div class="event-card w3-animate-opacity mySlides" style="display: none;">
-                    <div class="event-header w3-xlarge">${event[0]}</div>
+                    <div class="event-header w3-xlarge">${event[0]} <strong>[${event[9]}]</strong></div>
                     <img src="${event[1]}" alt="${event[0]}" class="w3-image event-image">
                     <div class="event-details">
                         <p>${event[2]}</p>
