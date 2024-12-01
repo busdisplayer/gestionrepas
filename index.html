@@ -956,6 +956,7 @@ if (estEnVacances()) {
     const audio = document.createElement('audio');
 
     // Ajouter les attributs pour autoplay, loop et controls
+    audio.setAttribute('id', 'audioDiv');
     audio.setAttribute('autoplay', 'true');
     audio.setAttribute('loop', 'true');
     audio.setAttribute('controls', 'true');
