@@ -968,9 +968,8 @@ if (estEnVacances()) {
     // Ajouter l'élément <audio> à l'élément de la page, par exemple dans le body
     document.body.appendChild(audio);
 }
- addAudioElement();
+ 
 // Appeler la fonction pour ajouter l'élément audio
-
 </script>
    
 <div id="snow-container" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;">
@@ -981,7 +980,7 @@ if (estEnVacances()) {
       const start = new Date(now.getFullYear(), 11, 1); // 1er décembre
       const end = new Date(now.getFullYear(), 11, 25); // 25 décembre
       if (now < start || now > end) return;
-       
+       addAudioElement();
       // Rendre le conteneur visible
       const container = document.getElementById('snow-container');
       container.style.display = 'block';
@@ -1070,34 +1069,6 @@ En cas de demandes, adressez-vous au service de développement, n'hésitez pas �
       this.textContent = 'Afficher la charte du site';
     }
   };
-</script>
-<script>
-    function addAudioElement() {
-    // Créer l'élément <audio>
-    const audio = document.createElement('audio');
-
-    // Ajouter les attributs pour autoplay, loop et controls
-    audio.setAttribute('autoplay', 'true');
-    audio.setAttribute('loop', 'true');
-    audio.setAttribute('controls', 'true');
-
-    // Créer l'élément <source>
-    const source = document.createElement('source');
-    source.setAttribute('src', 'https://cdn.pixabay.com/audio/2024/03/14/audio_38512f429d.mp3');
-    source.setAttribute('type', 'audio/mp3');
-
-    // Ajouter l'élément <source> à l'élément <audio>
-    audio.appendChild(source);
-
-    // Cacher l'élément <audio> en utilisant le style display:none
-    audio.style.display = 'none';
-
-    // Ajouter l'élément <audio> à l'élément de la page, par exemple dans le body
-    document.body.appendChild(audio);
-}
-
-// Appeler la fonction pour ajouter l'élément audio
-
 </script>
 
 </body>
