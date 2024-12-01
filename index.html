@@ -427,7 +427,9 @@ const infoPoint = document.getElementById("infoPoint"); // Ajout de la référen
                 hourFriends[row[1]] = row[0];
                 
                 // Ajoute la ligne au tableau
+                if (row[5] == '✅') {
                 tableBody.appendChild(tr);
+                }
             });
 
             // Une fois les données chargées, compare l'heure de l'utilisateur avec celles des autres amis
