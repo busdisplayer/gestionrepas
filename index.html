@@ -668,7 +668,7 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
     fetchAPOD();
     function translateDescription() {
     // Sélectionner l'élément à traduire
-    const descriptionElement = document.querySelector('#descriptionElement');
+    const descriptionElement = document.getElementById('apod-description');
     if (!descriptionElement) {
         console.error('Element with id "descriptionElement" not found.');
         return;
