@@ -666,6 +666,31 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
 
     // Appeler la fonction pour récupérer et afficher l'image
     fetchAPOD();
+    function translateDescription() {
+    // Sélectionner l'élément à traduire
+    const descriptionElement = document.querySelector('#descriptionElement');
+    if (!descriptionElement) {
+        console.error('Element with id "descriptionElement" not found.');
+        return;
+    }
+
+    // Récupérer le texte à traduire
+    const toTranslate = descriptionElement.innerText;
+
+    // Effectuer la requête pour traduire le texte
+    fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(toTranslate)}&langpair=en|fr`)
+        .then(response => response.json())
+        .then(data => {
+            // Vérifier si une traduction a été reçue
+            if (data.responseData && data.responseData.translatedText) {
+                // Mettre à jour l'élément avec la traduction
+                descriptionElement.innerHTML = `<p>${data.responseData.translatedText}</p>`;
+            } else {
+                console.error('Translation failed or missing response data:', data);
+            }
+        })
+        .catch(error => console.error('Error during translation request:', error));
+}
 </script>
     <div class="w3-content w3-center">
         <!-- Conteneur pour les événements générés dynamiquement -->
