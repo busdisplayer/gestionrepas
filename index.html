@@ -192,6 +192,10 @@
         animation: defilement-rtl 15s infinite linear;
         color:orange;
     }
+
+     .hidden {
+            display: none;
+        }
     
     @keyframes defilement-rtl {
         0% {
@@ -226,6 +230,47 @@
         document.getElementById("vacances-banner").style.display = "block";
     }
 </script>
+
+         <div id="birthday-message" class="marquee-rtl w3-container w3-margin">
+        <!-- Le message de l'anniversaire sera affiché ici si la condition est vraie -->
+    </div>
+
+    <script>
+        // URL de l'API avec la clé fournie
+        const apiUrl = "https://sheets.googleapis.com/v4/spreadsheets/1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4/values/Heures!L6:L7?key=AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q";
+
+        // Fonction principale pour récupérer et afficher les données
+        async function fetchAndDisplayBirthdayMessage() {
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                // Extraire les valeurs du JSON
+                const values = data.values;
+
+                // Vérification si la première valeur est "TRUE" pour afficher le message
+                if (values[0][0] === "TRUE") {
+                    const name = values[1][0]; // Le nom de la personne
+
+                    const message = `C'est l'anniversaire de ${name} 🎂`;
+
+                    // Créer le message défilant
+                    const messageDiv = document.getElementById("birthday-message");
+                    messageDiv.innerHTML = `<div class="scrolling-message w3-center">${message}</div>`;
+                    messageDiv.classList.remove("hidden"); // S'assurer que le message est visible
+                } else {
+                    // Si la première ligne est "FALSE", masquer le message
+                    document.getElementById("birthday-message").classList.add("hidden");
+                }
+            } catch (error) {
+                console.error("Erreur lors de la récupération des données :", error);
+                document.getElementById("birthday-message").innerHTML = "<p class='w3-text-red'>Erreur de chargement des données.</p>";
+            }
+        }
+
+        // Appel de la fonction pour afficher le message
+        fetchAndDisplayBirthdayMessage();
+    </script>
 
 
     <div class="w3-blue w3-animate-top">
