@@ -814,10 +814,11 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
                 container.innerHTML = ""; // Nettoyer le contenu précédent
 
                 // Boucle sur les données et affichage
-                birthdayList.forEach((entry) => {
-                    if (entry[0]) {
-                        const [joursRestants, date, nom, age] = entry[0].split(","); // Format : "joursRestants,date,nom,age"
-
+                 // Format : "joursRestants,date,nom,age"
+joursRestants = bithdayList[3];
+                date = bithdayList[0];
+                nom = bithdayList[1];
+                 age = bithdayList[2];
                         const cardContent = `
                             <div class="w3-panel w3-border w3-round-large w3-padding w3-white w3-margin-bottom">
                                 <p class="w3-large w3-center">
