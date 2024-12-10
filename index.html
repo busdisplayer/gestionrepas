@@ -791,6 +791,54 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
         // Charger les événements à l'initialisation
         loadEvents();
     </script>
+        <div class="w3-container w3-margin">
+        <div id="birthday-card" class="w3-card-4 w3-padding w3-margin w3-light-grey">
+            <p class="w3-center">Chargement...</p>
+        </div>
+    </div>
+
+    <script>
+        // URL de l'API avec la clé fournie
+        const apiUrl = "https://sheets.googleapis.com/v4/spreadsheets/1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4/values/Heures!L:L?key=AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q";
+
+        // Fonction principale pour récupérer et afficher les données
+        async function fetchAndDisplayBirthdays() {
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                // Exemple : les données sont dans la colonne L
+                const birthdayList = data.values.slice(1); // Ignorer l'en-tête
+
+                const container = document.getElementById("birthday-card");
+                container.innerHTML = ""; // Nettoyer le contenu précédent
+
+                // Boucle sur les données et affichage
+                birthdayList.forEach((entry) => {
+                    if (entry[0]) {
+                        const [joursRestants, date, nom, age] = entry[0].split(","); // Format : "joursRestants,date,nom,age"
+
+                        const cardContent = `
+                            <div class="w3-panel w3-border w3-round-large w3-padding w3-white w3-margin-bottom">
+                                <p class="w3-large w3-center">
+                                    Dans <strong>${joursRestants} jours</strong>, le <strong>${date}</strong>, <strong>${nom}</strong> aura <strong>${age} ans</strong>.
+                                </p>
+                            </div>
+                        `;
+
+                        container.innerHTML += cardContent;
+                    }
+                });
+
+            } catch (error) {
+                console.error("Erreur lors de la récupération des données :", error);
+                document.getElementById("birthday-card").innerHTML = "<p class='w3-text-red'>Erreur de chargement des données.</p>";
+            }
+        }
+
+        // Appel de la fonction
+        fetchAndDisplayBirthdays();
+    </script>
         
          <!-- Affichage de la dernière connexion -->
 <div class="connection-info w3-center w3-blue" id="lastConnection">
