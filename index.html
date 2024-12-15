@@ -565,9 +565,8 @@ const message = compareTime();
     console.log(`Mise à jour pour ${ligne} à l'heure : ${time}`);
 
       // Requête PATCH avec Axios
-        const decodedUrl = decode('myyux?44xmjjyig3nt4fun4{64<too:qp6pwl4sfrj4',5);
-        const patchUrl = '${decodedUrl}/name/${student}';
-      axios.patch(patchUrl, {
+        const decodedPatch2 = decode("<too:qp6pwl",5);
+    axios.patch(`https://sheetdb.io/api/v1/${decodedPatch2}/name/${student}`, {
         data: {
           hour: time, // Mise à jour du champ "hour"
         updated: updatedTime
