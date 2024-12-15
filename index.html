@@ -254,48 +254,50 @@
     }
 </script>
 
-         <div id="birthday-message" class="marquee-rtl w3-container w3-margin">
-        <!-- Le message de l'anniversaire sera affiché ici si la condition est vraie -->
-    </div>
+        <div id="birthday-message" class="marquee-rtl w3-container w3-margin">
+    <!-- Le message de l'anniversaire sera affiché ici si la condition est vraie -->
+</div>
 
-    <script>
-        // URL de l'API avec la clé fournie
-        const apiUrl2 = decode("myyux?44xmjjyx3lttlqjfunx3htr4{94xuwjfixmjjyx46♠VgUOzz>OX7jMjx26_:Sfdi]RF8M2irnpZy{nwMsS94{fqzjx4Mjzwjx&Q;?Q<Dpj~BFNfX~Fs]jSKhxfINJ♠9y[Y[fq{Tn♠:P~XJ=K>V", 5);
+<script>
+    // URL de l'API avec la clé fournie
+    const apiUrl2 = decode("myyux?44xmjjyx3lttlqjfunx3htr4{94xuwjfixmjjyx46♠VgUOzz>OX7jMjx26_:Sfdi]RF8M2irnpZy{nwMsS94{fqzjx4Mjzwjx&Q;?Q<Dpj~BFNfX~Fs]jSKhxfINJ♠9y[Y[fq{Tn♠:P~XJ=K>V", 5);
 
-        // Fonction principale pour récupérer et afficher les données
-        async function fetchAndDisplayBirthdayMessage() {
-            try {
-                const response = await fetch(apiUrl2);
-                const data = await response.json();
+    // Fonction principale pour récupérer et afficher les données
+    async function fetchAndDisplayBirthdayMessage() {
+        try {
+            const response = await fetch(apiUrl2);
+            const data = await response.json();
 
-                // Extraire les valeurs du JSON
-                const values = data.values;
-                console.log(values);
+            // Extraire les valeurs du JSON
+            const values = data.values;
+            console.log(values);
 
-                // Vérification si la première valeur est "TRUE" pour afficher le message
-                if (values[5] === "TRUE") {
-                    const name = values[2]; // Le nom de la personne
+            // Vérification si la valeur à l'index 5 est "TRUE" pour afficher le message
+            if (values[5][0] === "TRUE") {
+                const name = values[2][0]; // Le nom de la personne
 
-                    const message = `C'est l'anniversaire de ${name} 🎂`;
-                    console.log(message);
+                const message = `C'est l'anniversaire de ${name} 🎂`;
+                console.log(message);
 
-                    // Créer le message défilant
-                    const messageDiv = document.getElementById("birthday-message");
-                    messageDiv.innerHTML = `<div class="scrolling-message w3-center">${message}</div>`;
-                    messageDiv.classList.remove("hidden"); // S'assurer que le message est visible
-                } else {
-                    // Si la première ligne est "FALSE", masquer le message
-                    document.getElementById("birthday-message").classList.add("hidden");
-                }
-            } catch (error) {
-                console.error("Erreur lors de la récupération des données :", error);
-                document.getElementById("birthday-message").innerHTML = "<p class='w3-text-red'>Erreur de chargement des données.</p>";
+                // Créer le message défilant
+                const messageDiv = document.getElementById("birthday-message");
+                messageDiv.innerHTML = `<div class="w3-center">${message}</div>`;
+                messageDiv.style.display = 'block'; // Afficher le message
+            } else {
+                // Masquer le message si la condition est FALSE
+                document.getElementById("birthday-message").style.display = 'none';
             }
+        } catch (error) {
+            console.error("Erreur lors de la récupération des données :", error);
+            document.getElementById("birthday-message").innerHTML = "<p class='w3-text-red'>Erreur de chargement des données.</p>";
+            document.getElementById("birthday-message").style.display = 'block';
         }
+    }
 
-        // Appel de la fonction pour afficher le message
-        fetchAndDisplayBirthdayMessage();
-    </script>
+    // Appel de la fonction pour afficher le message
+    fetchAndDisplayBirthdayMessage();
+</script>
+
 
 
     <div class="w3-blue w3-animate-top">
