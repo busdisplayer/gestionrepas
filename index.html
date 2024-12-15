@@ -259,6 +259,7 @@
 </div>
 
 <script>
+    const birthname;
     // URL de l'API avec la clé fournie
     const apiUrl2 = decode("myyux?44xmjjyx3lttlqjfunx3htr4{94xuwjfixmjjyx46♠VgUOzz>OX7jMjx26_:Sfdi]RF8M2irnpZy{nwMsS94{fqzjx4Mjzwjx&Q?QDpj~BFNfX~Fs]jSKhxfINJ♠9y[Y[fq{Tn♠:P~XJ=K>V", 5);
 
@@ -276,6 +277,7 @@ console.log(data);
                 const name = values[2][0]; // Le nom de la personne
 
                 const message = `C'est l'anniversaire de ${name} 🎂`;
+                const birthname = name;
                 console.log(message);
 
                 // Créer le message défilant
@@ -466,6 +468,10 @@ const infoPoint = document.getElementById("infoPoint"); // Ajout de la référen
                     }
                 } else {
                     tdNom.textContent = row[1] || ""; // Si row[1] est vide, on affiche une chaîne vide
+                }
+
+                if (birthname === row[1]) {
+                    tdNom.textContent = `${tdNom.textContent} 🎂`;
                 }
                 
                 tr.appendChild(tdNom);
