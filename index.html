@@ -208,21 +208,27 @@
 </style>
 <script>
     function decode(encodedStr, shift) {
-    let decodedStr = '';
+        let decodedStr = '';
 
-    for (let i = 0; i < encodedStr.length; i++) {
-        // Obtenir le code ASCII du caractère actuel
-        let charCode = encodedStr.charCodeAt(i);
-        
-        // Décaler le caractère en soustrayant le shift
-        let newCharCode = charCode - shift; 
-        
-        // Convertir le nouveau code ASCII en caractère
-        decodedStr += String.fromCharCode(newCharCode);
+        for (let i = 0; i < encodedStr.length; i++) {
+            // Obtenir le code ASCII du caractère actuel
+            let charCode = encodedStr.charCodeAt(i);
+
+            let newCharCode;
+            if (charCode === 92) {
+                // Si le caractère est une barre oblique inverse (\), le remplacer par 'W'
+                newCharCode = 87;  // Code ASCII de 'W'
+            } else {
+                // Sinon, appliquer le décalage
+                newCharCode = charCode - shift;
+            }
+
+            // Convertir le nouveau code ASCII en caractère et l'ajouter à la chaîne décryptée
+            decodedStr += String.fromCharCode(newCharCode);
+        }
+
+        return decodedStr;
     }
-
-    return decodedStr;
-}
 </script>
 <script>
     // Dates des vacances scolaires 2024-2025 pour la zone A
