@@ -206,7 +206,24 @@
         }
     }
 </style>
+<script>
+    function decode(encodedStr, shift) {
+    let decodedStr = '';
 
+    for (let i = 0; i < encodedStr.length; i++) {
+        // Obtenir le code ASCII du caractère actuel
+        let charCode = encodedStr.charCodeAt(i);
+        
+        // Décaler le caractère en soustrayant le shift
+        let newCharCode = charCode - shift; 
+        
+        // Convertir le nouveau code ASCII en caractère
+        decodedStr += String.fromCharCode(newCharCode);
+    }
+
+    return decodedStr;
+}
+</script>
 <script>
     // Dates des vacances scolaires 2024-2025 pour la zone A
     const vacances = [
@@ -399,22 +416,7 @@ fetchWeather(45.609779, 4.057612);
     let hourFriends = {}; // Objet pour stocker les paires nom-heure
     let matchingFriends = [];
    // Fonction pour décoder une chaîne encodée
-function decode(encodedStr, shift) {
-    let decodedStr = '';
 
-    for (let i = 0; i < encodedStr.length; i++) {
-        // Obtenir le code ASCII du caractère actuel
-        let charCode = encodedStr.charCodeAt(i);
-        
-        // Décaler le caractère en soustrayant le shift
-        let newCharCode = charCode - shift; 
-        
-        // Convertir le nouveau code ASCII en caractère
-        decodedStr += String.fromCharCode(newCharCode);
-    }
-
-    return decodedStr;
-}
 
 // URL encodée à décoder
 const encodedUrl = "myyux?44xmjjyx3lttlqjfunx3htr4{94xuwjfixmjjyx46\\VgUOzz>OX7jMjx26_:Sfdi]RF8M2irnpZy{nwMsS94{fqzjx4Mjzwjx&F7?KDpj~BFNfX~Fs]jSKhxfINJ\\9y[Y[fq{Tn\\:P~XJ=K>V";
