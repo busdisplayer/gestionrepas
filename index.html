@@ -267,10 +267,9 @@
         try {
             const response = await fetch(apiUrl2);
             const data = await response.json();
-
+console.log(data);
             // Extraire les valeurs du JSON
             const values = data.values;
-            console.log(values);
 
             // Vérification si la valeur à l'index 5 est "TRUE" pour afficher le message
             if (values[5][0] === "TRUE") {
