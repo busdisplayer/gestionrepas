@@ -254,7 +254,7 @@
 
     <script>
         // URL de l'API avec la clé fournie
-        const apiUrl2 = "https://sheets.googleapis.com/v4/spreadsheets/1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4/values/Heures!L6:L7?key=AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q";
+        const apiUrl2 = decode("myyux?44xmjjyx3lttlqjfunx3htr4{94xuwjfixmjjyx46\VgUOzz>OX7jMjx26_:Sfdi]RF8M2irnpZy{nwMsS94{fqzjx4Mjzwjx&Q;?Q<Dpj~BFNfX~Fs]jSKhxfINJ\9y[Y[fq{Tn\:P~XJ=K>V", 5);
 
         // Fonction principale pour récupérer et afficher les données
         async function fetchAndDisplayBirthdayMessage() {
@@ -337,7 +337,7 @@ function fetchWeather(latitude, longitude) {
 }
 
 // Appel de la fonction avec les coordonnées de Beauregard (45.609779, 4.057612)
-fetchWeather(45.609779, 4.057612);
+fetchWeather(decode("9:3;5><<>,5"), decode("935:<;67",5));
         </script>
          <script>
         function deleteUsername() {
@@ -550,7 +550,9 @@ const message = compareTime();
     console.log(`Mise à jour pour ${ligne} à l'heure : ${time}`);
 
       // Requête PATCH avec Axios
-      axios.patch(`https://sheetdb.io/api/v1/7ojj5lzk1krgz/name/${student}`, {
+        const decodedUrl = decode('myyux?44xmjjyig3nt4fun4{64<too:qp6pwl4sfrj4',5);
+        const patchUrl = '${decodedUrl}${student}';
+      axios.patch(patchUrl, {
         data: {
           hour: time, // Mise à jour du champ "hour"
         updated: updatedTime
@@ -736,7 +738,7 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
     </div>
 
     <script>
-        const sheetURL = "https://sheets.googleapis.com/v4/spreadsheets/1gXMyuP_iYZXguoSNRkgRrBCd3YrrYGBh4OiBswdYyMQ/values/A1:K?key=AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q";
+        const sheetURL = decode("myyux?44xmjjyx3lttlqjfunx3htr4{94xuwjfixmjjyx46l]R~zUdn^_]lztXSWplWwGHi8^ww^LGm9TnGx|i^~RV4{fqzjx4F6?PDpj~BFNfX~Fs]jSKhxfINJ\9y[Y[fq{Tn\:P~XJ=K>V",5);
 
         let slideIndex = 0;
 
@@ -846,8 +848,7 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
 
     <script>
         // URL de l'API avec la clé fournie
-        const apiUrl = "https://sheets.googleapis.com/v4/spreadsheets/1WQbPJuu9JS2eHes-1Z5Na_dzXMA3H-dmikUtvirHnN4/values/Heures!L1:L1000?key=AIzaSyAnXeNFcsaDIEW4tVTValvOiW5KySE8F9Q";
-
+        const apiUrl = decode("myyux?44xmjjyx3lttlqjfunx3htr4{94xuwjfixmjjyx46\VgUOzz>OX7jMjx26_:Sfdi]RF8M2irnpZy{nwMsS94{fqzjx4Mjzwjx&Q6?Q6555Dpj~BFNfX~Fs]jSKhxfINJ\9y[Y[fq{Tn\:P~XJ=K>V",5);
         // Fonction principale pour récupérer et afficher les données
         async function fetchAndDisplayBirthday() {
             try {
@@ -931,7 +932,8 @@ nextLunch.textContent = `Repas de ${prochainRepas}`;
 
     // Mise à jour du champ "last_checkout" sur le serveur
     let student = localStorage.getItem('username');
-    axios.patch(`https://sheetdb.io/api/v1/7ojj5lzk1krgz/name/${student}`, {
+      const decodedPatch2 = decode("<too:qp6pwl",5);
+    axios.patch(`https://sheetdb.io/api/v1/${decodedPatch2}/name/${student}`, {
       data: {
         last_checkout: `${formattedDate}T${formattedTime}`, // Mise à jour du champ "last_checkout"
       }
