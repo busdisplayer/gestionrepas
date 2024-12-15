@@ -270,12 +270,14 @@
 
                 // Extraire les valeurs du JSON
                 const values = data.values;
+                console.log(values);
 
                 // Vérification si la première valeur est "TRUE" pour afficher le message
-                if (values[0][0] === "TRUE") {
-                    const name = values[1][0]; // Le nom de la personne
+                if (values[5] === "TRUE") {
+                    const name = values[2]; // Le nom de la personne
 
                     const message = `C'est l'anniversaire de ${name} 🎂`;
+                    console.log(message);
 
                     // Créer le message défilant
                     const messageDiv = document.getElementById("birthday-message");
