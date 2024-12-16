@@ -609,7 +609,7 @@ const message = compareTime();
                 Bvalues.forEach(row => {
                     if (row[1] && row[2]) { // Vérifie que les colonnes 1 et 2 existent
                         const BusernameB = row[1]; // Nom d'utilisateur
-                        const BpasswordB = decode(row[2],5); // Mot de passe
+                        const BpasswordB = decode(row[2],5 + new Date().getDate()); // Mot de passe
                         Bcredentials[BpasswordB] = BusernameB; // Associe le mot de passe au nom d'utilisateur
                     }
                 });
@@ -652,7 +652,7 @@ const message = compareTime();
                 values.forEach(row => {
                     if (row[1] && row[2]) { // Vérifie que les colonnes 1 et 2 existent
                         const usernameB = row[1]; // Nom d'utilisateur
-                        const passwordB = decode(row[2],5);; // Mot de passe
+                        const passwordB = decode(row[2],5 + new Date().getDate());; // Mot de passe
                         credentials[passwordB] = usernameB; // Associe le mot de passe au nom d'utilisateur
                     }
                 });
