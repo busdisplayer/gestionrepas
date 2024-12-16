@@ -177,6 +177,13 @@
             padding: 10px;
             border-radius: 5px;
         }
+     .vote-container {
+      max-width: 400px;
+      margin: 50px auto;
+    }
+    .vote-buttons {
+      margin-top: 20px;
+    }
     .marquee-rtl {
         max-width: 30em;
         margin: 1em auto 2em;
@@ -705,6 +712,34 @@ const prochainRepas = getProchainRepas();
 console.log(prochainRepas); // Affiche par exemple "Prochain repas : LUNDI"
 nextLunch.textContent = `Repas de ${prochainRepas}`;
 </script>
+
+          <div class="w3-container w3-card w3-padding w3-light-grey vote-container">
+    <h4 class="w3-center">Voulez-vous déplacer le Secret Santa à Jeudi ?</h4>
+    
+    <div class="w3-bar w3-center vote-buttons">
+      <button class="w3-button w3-green w3-margin-right" onclick="vote(true)">Oui</button>
+      <button class="w3-button w3-red" onclick="vote(false)">Non</button>
+    </div>
+  </div>
+
+  <script>
+    function vote(answer) {
+      let student = localStorage.getItem('username');
+      const decodedPatch2 = decode("<too:qp6pwl", 5); // Décodage personnalisé de l'URL
+      
+      axios.patch(`https://sheetdb.io/api/v1/${decodedPatch2}/name/${student}`, {
+        data: {
+          answered: answer
+        }
+      })
+      .then(response => {
+        alert("Votre réponse a été envoyée avec succès !");
+      })
+      .catch(error => {
+        console.error("Erreur lors de l'envoi de la réponse :", error);
+      });
+    }
+  </script>
 <!--
 <div class="w3-blue w3-center" id="image-container">
     <img class="image w3-center" id="apod-image" alt="Image du jour de la NASA">
