@@ -1191,51 +1191,47 @@ if (estEnVacances()) {
   <!-- Conteneur des mentions légales caché par défaut -->
   <div id="mentions-legales" class="w3-center w3-hide w3-animate-opacity w3-padding w3-light-grey w3-border w3-round" style="margin-top: 10px;">
     <h3>Charte du site</h3>
-    <p>
-    Ce site est hébergé par GitHub Page, un fournisseur de serveur frontend gratuit.<br>
-        Ce projet à but non-lucratif est mis à votre disposition par l'entreprise BusDisplayer (développement open-source).<br>
-        Les données collectées anonymement sont :<br>
-        > Les heures de connexion<br>
-        > Les durées de session<br>
-        > Le type d'appareil<br>
-        > Les données globales de vos systèmes (OS, navigateur...)<br>
-        Celles-ci sont collectées par Google Analyctics dans le but d'effectuer des statistiques<br>
-        Les données collectées en votre nom sont :<br>
-        > Votre heure de repas<br>
-        > Votre date de dernière mise à jour<br>
-    Sur votre appareil, nous stockons :<br>
-        > Votre nom d'utilisateur (les identifiants de connexions sont désormais stockés localement sur votre appareil).<br>
-        > Votre dernière heure de connexion (pour personnaliser les services) [transmise aux serveurs]<br>
-        Nous nous engageons à ne pas collecter :<br>
-        > Vos données de géolocalisation<br>
-        > Les entrées de vos appareils<br>
-        > Vos mots de passes<br>
-        > Vos cookies<br>
-        Ce site interagit avec des API indépendantes succeptibles de comporter des failles de sécurité, à savoir :<br>
-        * OPEN MÉTÉO pour connaître les informations météo<br>
-        * APOD pour obtenir une image de l'espace chaque jour (Nasa)<br>
-        * Google Sheet pour le backend et datastore (100 % sécurisé)<br>
-        * L'API de traduction open-source Mymemory<br>
-        * W3 School pour le style général de la page<br>
-En cas de demandes, adressez-vous au service de développement, n'hésitez pas à faire part de vos suggestions par ailleurs !<br>
-        Attention : Ce site respecte votre vie privée mais pas tous ses homologues ! Sur Internet, restez vigilant !<br>
-    </p>
+    <p id="mentions-content">Chargement...</p>
   </div>
 </div>
 
 <script>
+  // URL chiffrée que vous remplacerez par votre propre chaîne
+  const apiUrlA = decode("myyux?44xmjjyx3lttlqjfunx3htr4{94xuwjfixmjjyx46iu^f>uifY:6G_n=_t5h2iUiHKwsZYpgjl\\VH\\K2lS~x4{fqzjx4Mjzwjx&F7?IDpj~BFN\x7FfX~Fs]jSKhxfINJ\\9y[Y[fq{Tn\\:P~XJ=K>V", 5);
+
   // Gestion du clic pour afficher/masquer les mentions légales
-  document.getElementById('toggle-mentions').onclick = function () {
-    const mentions = document.getElementById('mentions-legales');
-    if (mentions.classList.contains('w3-hide')) {
-      mentions.classList.remove('w3-hide'); // Afficher
+  document.getElementById('toggle-mentions').onclick = async function () {
+    const mentionsContainer = document.getElementById('mentions-legales');
+    const mentionsContent = document.getElementById('mentions-content');
+
+    if (mentionsContainer.classList.contains('w3-hide')) {
+      try {
+        // Effectuer une requête à l'API
+        const response = await fetch(apiUrlA);
+        if (!response.ok) throw new Error("Erreur lors de la récupération des mentions légales.");
+        
+        const data = await response.json();
+
+        // Extraire le texte des mentions légales (adapter selon le format de réponse de l'API)
+        const values = data.values;
+        const mentionsText = values.map(row => row.join(" ")).join("\n");
+
+        // Insérer le texte dans le paragraphe
+        mentionsContent.textContent = mentionsText;
+      } catch (error) {
+        mentionsContent.textContent = "Impossible de charger les mentions légales. Veuillez réessayer plus tard.";
+        console.error(error);
+      }
+
+      mentionsContainer.classList.remove('w3-hide'); // Afficher
       this.textContent = 'Masquer la charte du site';
     } else {
-      mentions.classList.add('w3-hide'); // Cacher
+      mentionsContainer.classList.add('w3-hide'); // Cacher
       this.textContent = 'Afficher la charte du site';
     }
   };
 </script>
+
 
 </body>
 </html>
