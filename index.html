@@ -603,7 +603,8 @@ const message = compareTime();
       // Requête PATCH avec Axios
       axios.patch(`https://sheetdb.io/api/v1/${decodedPatch2}/name/${student}`, {
         hour: time, // Mise à jour du champ "hour"
-        updated: new Date().toISOString() // Horodatage de la mise à jour
+        updated: new Date().toLocaleDateString('fr-CA').split('-').reverse().join('/');
+// Horodatage de la mise à jour
       })
       .then(response => {
         console.log("Mise à jour réussie :", response);
