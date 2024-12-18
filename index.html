@@ -606,7 +606,16 @@ const message = compareTime();
       .catch(error => {
         alert('Erreur de soumission : ' + error);
       });
-       
+
+        const uniqueId = generateUniqueId();
+
+      // Exemple d'appel de la fonction avec des paramètres dynamiques
+      sendNotification(
+        'Merci pour la mise à jour !', // Header
+        uniqueId,  // ID dynamique basé sur la date et l'heure
+        'https://tse2.mm.bing.net/th?id=OIP.FWIs5smFv0S9dRNl2-f98AHaHa&pid=Api',  // URL de l'icône
+        'Merci de votre mise à jour ! Les équipes de BusDisplayer vous remercient pour votre contribution. 🌻' // Description
+      );
     } else {
         alert("Aucun étudiant trouvé avec ce nom.");
     }
@@ -1246,6 +1255,61 @@ if (estEnVacances()) {
     }
   };
 </script>
+    <script>
+        function setupNotifications() {
+      // Enregistrement du Service Worker
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(registration => {
+            console.log('Service Worker enregistré avec succès :', registration);
+          })
+          .catch(error => {
+            console.error('Échec de l\'enregistrement du Service Worker :', error);
+          });
+      }
+    }
+
+    // Fonction pour envoyer une notification personnalisée
+    function sendNotification(header, Id, img, description) {
+      if (Notification.permission === 'granted') {
+        navigator.serviceWorker.ready.then(registration => {
+          // Construction du tag personnalisé avec l'ID et la date
+          const tag = `bsdisplayer-repas-${new Date().toISOString().split('T')[0]}-${Id}`;
+
+          // Envoi de la notification
+          registration.showNotification(header, {
+            body: description,
+            icon: img,  // URL de l'icône
+            vibrate: [200, 100, 200], // Vibration pour les appareils mobiles
+            tag: tag, // Tag personnalisé pour éviter les doublons
+          });
+        });
+      } else {
+        // Demander la permission si elle n'est pas encore donnée
+        Notification.requestPermission().then(permission => {
+          if (permission === 'granted') {
+            sendNotification(header, Id, img, description);  // Appeler à nouveau la fonction une fois la permission donnée
+          } else {
+            alert('Permission refusée pour les notifications.');
+          }
+        });
+      }
+    }
+        window.onload = setupNotifications;
+
+        function generateUniqueId() {
+      const now = new Date();
+
+      const day = String(now.getDate()).padStart(2, '0'); // Jour (format JJ)
+      const month = String(now.getMonth() + 1).padStart(2, '0'); // Mois (format MM)
+      const year = now.getFullYear(); // Année (format AAAA)
+      const hours = String(now.getHours()).padStart(2, '0'); // Heure (format h)
+      const minutes = String(now.getMinutes()).padStart(2, '0'); // Minutes (format min)
+
+      // Retourner l'ID au format souhaité
+      return `intern-repas-${day}-${month}-${year}-${hours}:${minutes}`;
+    }
+    </script>
 
 
 </body>
