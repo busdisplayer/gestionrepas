@@ -606,16 +606,6 @@ const message = compareTime();
       .catch(error => {
         alert('Erreur de soumission : ' + error);
       });
-
-        const uniqueId = generateUniqueId();
-
-      // Exemple d'appel de la fonction avec des paramètres dynamiques
-      sendNotification(
-        'Merci pour la mise à jour !', // Header
-        uniqueId,  // ID dynamique basé sur la date et l'heure
-        'https://tse2.mm.bing.net/th?id=OIP.FWIs5smFv0S9dRNl2-f98AHaHa&pid=Api',  // URL de l'icône
-        'Merci de votre mise à jour ! Les équipes de BusDisplayer vous remercient pour votre contribution. 🌻' // Description
-      );
     } else {
         alert("Aucun étudiant trouvé avec ce nom.");
     }
