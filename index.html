@@ -567,50 +567,79 @@ const message = compareTime();
   document.getElementById("studentForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
-    const student = storedUsername.toLowerCase().replace(/\s+/g, '_');
-    const time = document.getElementById("time").value;
-     let ligne = null;
-      
-    let range = null; // Initialise la variable range
-    for (let i = 0; i < noms.length; i++) {
-        if (noms[i].toLowerCase().replace(/\s+/g, '_') === student) {
-            ligne = i + 2; // Ajustement du numéro de ligne pour correspondre à l'indexation de la feuille de calcul
-             // Définit la plage uniquement si une correspondance est trouvée
-            
-            break; // Quitte la boucle après avoir trouvé la correspondance
-        }
+    // Vérifie que storedUsername est défini
+    if (typeof storedUsername === 'undefined' || !storedUsername) {
+      alert("Le nom d'utilisateur n'est pas défini.");
+      return;
     }
 
-    if (ligne) { // Procède uniquement si une plage correspondante a été trouvée
-    console.log(time);
-    console.log(ligne);
-    console.log(`Mise à jour pour ${ligne} à l'heure : ${time}`);
+    // Normalise le nom de l'étudiant
+    const student = storedUsername.toLowerCase().replace(/\s+/g, '_');
+    const time = document.getElementById("time").value;
+
+    // Vérifie que le champ time est rempli
+    if (!time) {
+      alert("Veuillez saisir une heure.");
+      return;
+    }
+
+    let ligne = null;
+
+    // Trouve la ligne correspondant au nom de l'étudiant
+    for (let i = 0; i < noms.length; i++) {
+      if (noms[i].toLowerCase().replace(/\s+/g, '_') === student) {
+        ligne = i + 2; // Ajustement pour correspondre à l'indexation de la feuille de calcul
+        break; // Quitte la boucle après avoir trouvé la correspondance
+      }
+    }
+
+    if (ligne) {
+      console.log(time);
+      console.log(ligne);
+      console.log(`Mise à jour pour ${ligne} à l'heure : ${time}`);
+
+      // URL déchiffrée pour l'API
+      const decodedPatch2 = decode("<too:qp6pwl", 5);
 
       // Requête PATCH avec Axios
-        const decodedPatch2 = decode("<too:qp6pwl",5);
-    axios.patch(`https://sheetdb.io/api/v1/${decodedPatch2}/name/${student}`, {
-        data: {
-          hour: time, // Mise à jour du champ "hour"
-        updated: updatedTime
-        }
+      axios.patch(`https://sheetdb.io/api/v1/${decodedPatch2}/name/${student}`, {
+        hour: time, // Mise à jour du champ "hour"
+        updated: new Date().toISOString() // Horodatage de la mise à jour
       })
       .then(response => {
-          if ("vibrate" in navigator) {
-    // Vibre pendant 1000 millisecondes (1 seconde)
-    navigator.vibrate(500);
-} else {
-    console.log("Le vibreur n'est pas supporté sur ce navigateur.");
-}
+        console.log("Mise à jour réussie :", response);
+
+        // Vérifie si le navigateur supporte le vibreur
+        if ("vibrate" in navigator) {
+          navigator.vibrate(500); // Vibre pendant 500 millisecondes
+        } else {
+          console.log("Le vibreur n'est pas supporté sur ce navigateur.");
+        }
+
+        // Recharge la page après une mise à jour réussie
         window.location.reload();
       })
       .catch(error => {
-        alert('Erreur de soumission : ' + error);
+        console.error('Erreur de soumission :', error);
+        alert('Erreur de soumission : ' + error.message);
       });
+
+      // Génère un ID unique pour la notification
+      const uniqueId = generateUniqueId();
+
+      // Envoie une notification avec des paramètres dynamiques
+      sendNotification(
+        'Merci pour la mise à jour !', // Header
+        uniqueId,  // ID dynamique basé sur la date et l'heure
+        'https://tse2.mm.bing.net/th?id=OIP.FWIs5smFv0S9dRNl2-f98AHaHa&pid=Api',  // URL de l'icône
+        'Merci de votre mise à jour ! Les équipes de BusDisplayer vous remercient pour votre contribution. 🌻' // Description
+      );
     } else {
-        alert("Aucun étudiant trouvé avec ce nom.");
+      alert("Aucun étudiant trouvé avec ce nom.");
     }
-});
+  });
 </script>
+
         
          <script>
    
