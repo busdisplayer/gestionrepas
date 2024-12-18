@@ -1218,7 +1218,7 @@ if (estEnVacances()) {
         const mentionsText = values.map(row => row.join(" ")).join("\n");
 
         // Insérer le texte dans le paragraphe
-        mentionsContent.textContent = mentionsText;
+        mentionsContent.innerHtml = mentionsText;
       } catch (error) {
         mentionsContent.textContent = "Impossible de charger les mentions légales. Veuillez réessayer plus tard.";
         console.error(error);
