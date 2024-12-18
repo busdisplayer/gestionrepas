@@ -10,7 +10,7 @@ if ('serviceWorker' in navigator) {
 }
 
 // Fonction pour demander la permission et afficher une notification
-document.getElementById('notify-btn').addEventListener('click', () => {
+document.getElementById("studentForm").addEventListener("submit", function(event) {
   // Demander la permission d'afficher des notifications
   if (Notification.permission === 'default') {
     Notification.requestPermission().then(permission => {
