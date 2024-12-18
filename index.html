@@ -215,6 +215,20 @@
     }
 </style>
 <script>
+// Désactiver le clic droit
+document.addEventListener('contextmenu', event => event.preventDefault());
+
+// Désactiver les touches de raccourci courantes pour l’inspection
+document.addEventListener('keydown', function (e) {
+  if (
+    e.ctrlKey && 
+    (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S' || e.key === 'j' || e.key === 'J')
+  ) {
+    e.preventDefault();
+  }
+});
+
+    
     function decode(encodedStr, shift) {
         let decodedStr = '';
 
