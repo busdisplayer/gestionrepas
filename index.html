@@ -1263,7 +1263,7 @@ if (estEnVacances()) {
         // Extraire le texte des mentions légales (adapter selon le format de réponse de l'API)
         const values = data.values;
         const mentionsText = values[0][0];
-
+console.log(mentionsText);
         // Insérer le texte dans le paragraphe
         mentionsContent.innerHtml = mentionsText;
       } catch (error) {
