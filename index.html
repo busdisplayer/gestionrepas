@@ -1257,7 +1257,7 @@ if (estEnVacances()) {
 
         // Extraire le texte des mentions légales (adapter selon le format de réponse de l'API)
         const values = data.values;
-        const mentionsText = values.map(row => row.join(" ")).join("\n");
+        const mentionsText = values[0][0];
 
         // Insérer le texte dans le paragraphe
         mentionsContent.innerHtml = mentionsText;
