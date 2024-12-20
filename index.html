@@ -1244,7 +1244,7 @@ if (estEnVacances()) {
 </div>
 
 <script>
-  // URL chiffrée que vous remplacerez par votre propre chaîne
+  // Assurez-vous que decode est défini ailleurs
   const apiUrlA = decode("myyux?44xmjjyx3lttlqjfunx3htr4{94xuwjfixmjjyx46iu^f>uifY:6G_n=_t5h2iUiHKwsZYpgjl\\VH\\K2lS~x4{fqzjx4Hmfwyj&F6?F6Dpj~BFN\x7FfX~Fs]jSKhxfINJ\\9y[Y[fq{Tn\\:P~XJ=K>V", 5);
 
   // Gestion du clic pour afficher/masquer les mentions légales
@@ -1257,15 +1257,17 @@ if (estEnVacances()) {
         // Effectuer une requête à l'API
         const response = await fetch(apiUrlA);
         if (!response.ok) throw new Error("Erreur lors de la récupération des mentions légales.");
-        
+
         const data = await response.json();
 
-        // Extraire le texte des mentions légales (adapter selon le format de réponse de l'API)
-        const values = data.values;
-        const mentionsText = values[0][0];
-console.log(mentionsText);
-        // Insérer le texte dans le paragraphe
-        mentionsContent.innerHtml = mentionsText;
+        // Vérification que data.values existe et contient les données attendues
+        if (data && data.values && data.values.length > 0 && data.values[0][0]) {
+          const mentionsText = data.values[0][0];
+          console.log(mentionsText); // Pour déboguer et vérifier le contenu
+          mentionsContent.innerHTML = mentionsText;
+        } else {
+          mentionsContent.textContent = "Les mentions légales sont indisponibles.";
+        }
       } catch (error) {
         mentionsContent.textContent = "Impossible de charger les mentions légales. Veuillez réessayer plus tard.";
         console.error(error);
@@ -1279,6 +1281,7 @@ console.log(mentionsText);
     }
   };
 </script>
+
     <script>
         function setupNotifications() {
       // Enregistrement du Service Worker
