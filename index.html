@@ -408,7 +408,7 @@ fetchWeather(decode("9:3;5><<>",5), decode("935:<;67",5));
             <button type="submit" class="w3-button w3-blue w3-margin-top w3-round">Transmettre</button>
         </form>
     </div>
-        <div class='w3-center w3-animate-right w3-blue'>
+        <div id="trieurInfo" class='w3-center w3-animate-right w3-blue'>
             <p id="infoPoint" class="w3-xlarge"></p>
         </div>
         <div class='w3-center w3-green  w3-animate-left'>
@@ -1339,6 +1339,7 @@ if (estEnVacances()) {
     if (estEnVacances()) {
         document.getElementById("vacances-banner").style.display = "block";
         document.getElementById("studentTable").style.display = "none";
+        document.getElementById("trieurInfo").style.display = "none";
     }
 </script>
 </body>
